@@ -10,7 +10,7 @@ You may want to check out [VSCodeSourceCodeAccess](https://github.com/christophe
 Install
 -------
 
-1) Download this extension as a .vsix package
+1) [Download](https://github.com/christopherreed/ue4-cpptools/releases) this extension as a .vsix package
 
 2) Install the .vsix package. [[?]](https://code.visualstudio.com/docs/editor/extension-gallery#_install-from-a-vsix)
 
