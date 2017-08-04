@@ -1,0 +1,94 @@
+{
+    "name": "ue4-cpptools",
+    "displayName": "ue4-cpptools",
+    "description": "VSCode Tools for working with Unreal Engine 4 C++ projects",
+    "version": "0.0.1",
+    "publisher": "christopherreed",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/christopherreed/ue4-cpptools"
+    },
+    "license": "MIT",
+    "engines": {
+        "vscode": "^1.14.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:ue4-cpptools.generateCppToolsConfiguration",
+        "onCommand:ue4-cpptools.generateProjectFiles",
+        "onCommand:ue4-cpptools.buildProject",
+        "onCommand:ue4-cpptools.hotReloadProject"
+    ],
+    "main": "./src/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "ue4-cpptools.generateCppToolsConfiguration",
+                "title": "Generate CppTools Configuration",
+                "category": "UE4 Tools"
+            },
+            {
+                "command": "ue4-cpptools.generateProjectFiles",
+                "title": "Generate Project Files",
+                "category": "UE4 Tools"
+            },
+            {
+                "command": "ue4-cpptools.buildProject",
+                "title": "Build Project",
+                "category": "UE4 Tools"
+            },
+            {
+                "command": "ue4-cpptools.hotReloadProject",
+                "title": "Hot Reload Project",
+                "category": "UE4 Tools"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "UE4 CppTools Configuration",
+            "properties": {
+                "ue4-cpptools.engineRootPath": {
+                    "type": "string",
+                    "description": "Path to Unreal Engine root directory"
+                },
+                "ue4-cpptools.configurationName": {
+                    "type": "string",
+                    "description": "Name of CppTools configuration to generate"
+                },
+                "ue4-cpptools.recycleTerminal": {
+                    "enum": [
+                        "Always",
+                        "Command",
+                        "Never"
+                    ],
+                    "description": "Controls terminal reuse for the extension"
+                },
+                "ue4-cpptools.overrideUnrealBuildTool": {
+                    "type": "string",
+                    "description": "Override the command to run Unreal Build Tool"
+                },
+                "ue4-cpptools.buildConfiguration": {
+                    "enum": [
+                        "Development",
+                        "DebugGame"
+                    ],
+                    "default": "Development"
+                }
+            }
+        }
+    },
+    "scripts": {
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.0.3",
+        "vscode": "^1.0.0",
+        "mocha": "^2.3.3",
+        "eslint": "^3.6.0",
+        "@types/node": "^6.0.40",
+        "@types/mocha": "^2.2.32"
+    }
+}
