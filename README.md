@@ -16,7 +16,7 @@ Install
 Usage
 -----
 
-1) Use the [extension settings](#Settings) to configure the extension for you workspace. [[?]](https://code.visualstudio.com/docs/getstarted/settings)
+1) Set the [required](#Required) settings and any additional settings you need to configure the extension for you workspace. [[?]](https://code.visualstudio.com/docs/getstarted/settings)
 
 2) Run [commands](#Commands) with the command pallette. [[?]](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette)
 
@@ -24,29 +24,31 @@ Usage
 Commands
 --------
 
-* UE4 CppTools - Generate CppTools Configuration : Generate [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) configuration for working with Unreal Engine 4 projects
+__UE4 CppTools - Generate Project Files__ : Generate project files for building Unreal Engine 4 projects
 
-* UE4 CppTools - Generate Project Files : Generate project files for building Unreal Engine 4 projects
+__UE4 CppTools - Generate CppTools Configuration__ : Generate [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) configuration for working with Unreal Engine 4 projects
 
-* UE4 CppTools - Build Project : Build project
+> Run Generate Project Files command before Generate CppTools Configuration
 
-* UE4 CppTools - Hot Reload Project : Build project for editor HotReload
+__UE4 CppTools - Build Project__ : Build project
+
+__UE4 CppTools - Hot Reload Project__ : Build project for editor HotReload
 
 Extension Settings
 ------------------
 ### Required
-* ue4-cpptools.engineRootPath : Path to Unreal Engine 4 root directory (overrides environment variable UE4_ENGINE_ROOT_PATH)
+__ue4-cpptools.engineRootPath__ : Path to Unreal Engine 4 root directory (overrides environment variable UE4_ENGINE_ROOT_PATH)
 
 ### Optional
-* ue4-cpptools.configurationName : Name of CppTools configuration to generate
+__ue4-cpptools.configurationName__ : Name of CppTools configuration to generate
 
-* ue4-cpptools.recycleTerminal : Controls terminal reuse for the extension
+__ue4-cpptools.recycleTerminal__ : Controls terminal reuse for the extension
 
 ### Advanced Settings (you probably shouldn't touch these)
 
-* ue4-cpptools.buildConfiguration : Unreal Build Tool build configuration
+__ue4-cpptools.buildConfiguration__ : Unreal Build Tool build configuration
 
-* ue4-cpptools.overrideUnrealBuildTool : Override the command to run Unreal Build Tool
+__ue4-cpptools.overrideUnrealBuildTool__ : Override the command to run Unreal Build Tool
 
 Known Issues
 ------------
