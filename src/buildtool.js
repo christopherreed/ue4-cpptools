@@ -3,68 +3,79 @@ const path = require('path');
 const fs = require('fs');
 const util = require('./util.js');
 
-function getUnrealBuildToolCommand(info, args) {
+function getUnrealBuildToolCommand(info) {
     return new Promise((resolve, reject) => {
-        let overrideUnrealBuildTool = info.overrideUnrealBuildTool;
-       
-        if (!overrideUnrealBuildTool) {
-            let engineRootPath = info.engineRootPath;
+        let engineRootPath = info.engineRootPath;
 
-            if (!engineRootPath) {
-                reject('Invalid or unset ue4-cpptools.engineRootPath');
-                return;
-            }
+        if (!engineRootPath) {
+            reject('Invalid or unset ue4-cpptools.engineRootPath');
+        } else {
+            let unrealBuildTool = path.join(engineRootPath, 'Engine', 'Binaries', 'DotNET', 'UnrealBuildTool.exe');
             
-            args.unshift(path.join(engineRootPath, 'Engine', 'Binaries', 'DotNET', 'UnrealBuildTool.exe'));
+            fs.access(unrealBuildTool, (err) => {
+                if (err) {
+                    reject(`Faild to acces Unreal Build Tool '${unrealBuildTool}' : ${err}`);
+                } else {
+                    resolve(unrealBuildTool);
+                }
+            });
+        }
+    });
+}
 
+// Enclose string in quotes if it contains a space char
+function fixStringWithSpaces(str) {
+    if (str.includes(' ')) return `"${str}"`;
+    return str;
+}
+
+function buildArgsString(args) {
+    let commandStr = '';
+    args.forEach((val) => {
+        let str = ' ' + fixStringWithSpaces(val.toString());
+        
+        commandStr = commandStr.concat(str);
+    });
+    
+    return commandStr;
+}
+
+function buildCommand(info, args) {
+    let overrideUnrealBuildTool = info.overrideUnrealBuildTool;
+
+    if (overrideUnrealBuildTool) {
+        return Promise.resolve(overrideUnrealBuildTool + buildArgsString(args)); // don't format override
+    }
+
+    return new Promise((resolve, reject) => {
+        getUnrealBuildToolCommand(info).then((command) => {
             if (process.platform == 'linux' || process.platform == 'mac') {
                 // Linux and Mac requires us to prepend 'mono'
-                args.unshift('mono');
+                args.unshift(command);
+                command = 'mono';
             } else {
                 let terminal = vscode.workspace.getConfiguration().terminal.integrated.shell.windows;
                 if (terminal && terminal.endsWith('powershell.exe')) {
                     // powershell requires us to prepend the call operator '&' to run commands not in cwd or on path
-                    args.unshift('&');
+                    args.unshift(command);
+                    command = '&';
                 }
             }
-        }
 
-        // concat command and args to a single string, any element that includes a space should be enclosed in quotes
-        let commandStr = overrideUnrealBuildTool || '';
-        args.forEach((val) => {
-            let str = val.toString();
-            if (str.includes(' ')) {
-                commandStr = commandStr.concat(` \"${val}\"`);
-            } else {
-                commandStr = commandStr.concat(` ${val}`);
-            }
-        });
-
-        resolve(commandStr);      
+            resolve(fixStringWithSpaces(command) + buildArgsString(args));
+        },
+        (err) => reject(err));
     });
 }
 
-function runCommandInTerminal(command, terminalName) {
-    util.findTerminal(terminalName)
-    .then((term) => {
-        term.show();
-        term.sendText(command);
-    }); 
+function runBuildTool(info, args, taskName) {
+    return buildCommand(info, args).then((command) => {
+        let terminal = util.findTerminal(taskName);
+        terminal.show();
+        terminal.sendText(command);
+    });
 }
 
-function runBuildTool(info, args, terminalName) {
-    return new Promise((resolve, reject) => {
-        getUnrealBuildToolCommand(info, args).then(
-            command => {
-                runCommandInTerminal(command, terminalName);
-                resolve();
-            },
-            err => {
-                reject(err)
-            }
-        );
-    }); 
-}
 
 function hotReloadProject() {
     util.getProjectInfo().then((info) => {
