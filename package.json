@@ -74,7 +74,8 @@
                         "Development",
                         "DebugGame"
                     ],
-                    "default": "Development"
+                    "default": "Development",
+                    "description" : "Unreal Build Tool build configuration"
                 }
             }
         }
