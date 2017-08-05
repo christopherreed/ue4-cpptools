@@ -93,7 +93,7 @@ function hotReloadProject() {
 
         runBuildTool(info, args, 'ue4-cpptools:HotReloadProject').then(
             (ok) => {},
-            (err) => {console.error(err);}    
+            (err) => {vscode.window.showErrorMessage(`${err}`);}    
         );
     });
 }
@@ -122,7 +122,7 @@ function buildProject() {
 
         runBuildTool(info, args, 'ue4-cpptools:BuildProject').then(
             (ok) => {},
-            (err) => {console.error(err);}    
+            (err) => {vscode.window.showErrorMessage(`${err}`);}    
         );
     });
 }
@@ -154,7 +154,7 @@ function generateProjectFiles() {
 
         runBuildTool(info, args, 'ue4-cpptools:GenerateProjectFiles').then(
             (ok) => {},
-            (err) => {console.error(err);}    
+            (err) => {vscode.window.showErrorMessage(`${err}`);}    
         );
     });
 }
