@@ -29,21 +29,19 @@ function removeTerminal(terminal) {
 exports.removeTerminal = removeTerminal;
 
 function findTerminal(terminalName) {
-    return new Promise((resolve, reject) => {
-        let recycleTerminal = vscode.workspace.getConfiguration('ue4-cpptools').get('recycleTerminal') || 'Always';
+    let recycleTerminal = vscode.workspace.getConfiguration('ue4-cpptools').get('recycleTerminal') || 'Always';
 
-        if (recycleTerminal == 'Always' || !terminalName) {
-            terminalName = 'ue4-cpptools';
-        }
+    if (recycleTerminal == 'Always' || !terminalName) {
+        terminalName = 'ue4-cpptools';
+    }
 
-        let term = terminals[terminalName];
-        if (recycleTerminal == 'Never' || !term) {
-            term = vscode.window.createTerminal(terminalName);
-            if (recycleTerminal != 'Never') terminals[terminalName] = term;
-        }
+    let term = terminals[terminalName];
+    if (recycleTerminal == 'Never' || !term) {
+        term = vscode.window.createTerminal(terminalName);
+        if (recycleTerminal != 'Never') terminals[terminalName] = term;
+    }
 
-        resolve(term);
-    });
+    return term;
 }
 exports.findTerminal = findTerminal;
 
