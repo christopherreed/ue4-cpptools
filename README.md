@@ -57,6 +57,8 @@ Known Issues
 
 * Relies on the Unreal Build Tool CodeLite project generator
 
+* Build / HotReload commands are experimental
+
 License
 -------
 
