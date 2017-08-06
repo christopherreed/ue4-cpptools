@@ -2,13 +2,18 @@
     "name": "ue4-cpptools",
     "displayName": "ue4-cpptools",
     "description": "VSCode Tools for working with Unreal Engine 4 C++ projects",
-    "version": "0.0.1",
+    "version": "0.0.2",
+    "preview" : true,
     "publisher": "christopherreed",
     "repository": {
         "type": "git",
         "url": "https://github.com/christopherreed/ue4-cpptools"
     },
+    "bugs" : {
+        "url" : "https://github.com/christopherreed/ue4-cpptools/issues"
+    },
     "license": "MIT",
+    "readme" : "README.md",
     "engines": {
         "vscode": "^1.14.0"
     },
