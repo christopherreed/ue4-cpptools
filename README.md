@@ -62,6 +62,8 @@ __ue4-cpptools.recycleTerminal__ : Controls terminal reuse for the extension
 
 __ue4-cpptools.buildConfiguration__ : Unreal Build Tool build configuration
 
+__ue4-cpptools.buildPlatform__ : Unreal Build Tool build platform
+
 __ue4-cpptools.overrideUnrealBuildTool__ : Override the command to run Unreal Build Tool
 
 Known Issues
