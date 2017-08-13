@@ -3,7 +3,7 @@
 const vscode = require('vscode');
 const cpptools = require('./cpptools.js');
 const buildtool = require('./buildtool.js');
-const util = require('./util.js');
+const terminal = require('./terminal.js');
 
 function activate(context) {
 
@@ -12,7 +12,7 @@ function activate(context) {
     context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.buildProject', buildtool.buildProject));
     context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.hotReloadProject', buildtool.hotReloadProject));
 
-    context.subscriptions.push(vscode.window.onDidCloseTerminal(term => {util.removeTerminal(term);}));
+    context.subscriptions.push(vscode.window.onDidCloseTerminal(term => {terminal.removeTerminal(term);}));
 }
 
 exports.activate = activate;

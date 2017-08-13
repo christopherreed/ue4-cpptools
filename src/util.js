@@ -17,34 +17,6 @@ function touchDirectory(directoryPath) {
 }
 exports.touchDirectory = touchDirectory;
 
-var terminals = {};
-
-function removeTerminal(terminal) {
-    let terminalName = terminal.name;
-
-    if (terminalName && terminals[terminalName] === terminal) {
-        terminals[terminalName] = undefined;
-    }
-}
-exports.removeTerminal = removeTerminal;
-
-function findTerminal(terminalName) {
-    let recycleTerminal = vscode.workspace.getConfiguration('ue4-cpptools').get('recycleTerminal') || 'Always';
-
-    if (recycleTerminal == 'Always' || !terminalName) {
-        terminalName = 'ue4-cpptools';
-    }
-
-    let term = terminals[terminalName];
-    if (recycleTerminal == 'Never' || !term) {
-        term = vscode.window.createTerminal(terminalName);
-        if (recycleTerminal != 'Never') terminals[terminalName] = term;
-    }
-
-    return term;
-}
-exports.findTerminal = findTerminal;
-
 function getProjectInfo() {
     return new Promise((resolve, reject) => {
         let projectPath = vscode.workspace.rootPath;
