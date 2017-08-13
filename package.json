@@ -77,10 +77,17 @@
                 "ue4-cpptools.buildConfiguration": {
                     "enum": [
                         "Development",
-                        "DebugGame"
+                        "DebugGame",
+                        "Development Editor",
+                        "DebugGame Editor",
+                        "Shipping"
                     ],
-                    "default": "Development",
+                    "default": "Development Editor",
                     "description" : "Unreal Build Tool build configuration"
+                },
+                "ue4-cpptools.buildPlatform": {
+                    "type" : "string",
+                    "description" : "Unreal Build Tool build platform"
                 }
             }
         }

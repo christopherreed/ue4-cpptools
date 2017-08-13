@@ -6,15 +6,16 @@ ue4-cpptools
 
 You may want to check out [VSCodeSourceCodeAccess](https://github.com/christopherreed/VSCodeSourceCodeAccess), an Unreal Engine 4 plugin that provides source code access for working with C++ projects using VSCode.
 
-Features
---------
 __USE AT YOUR OWN RISK__
 
 This extension is completely experimental, and shouldn't be used in a production environment. Things will probably change or break regulary.
 
-The goal is to supply some tools to make it a little easier to use VSCode as your IDE to edit code from Unreal Editor 4.
+Features
+--------
 
-Currently you can use it to generate a [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) IntelliSense configuration for your UE4 project. You can also build your project (experimental). Most commands are run in a integrated terminal (bash, cmd.exe, powershell, etc.) so the raw output is available.
+The goal is to supply some tools to make it a little easier to use VSCode as your IDE to edit code from Unreal Editor 4. Currently you can use it to generate a [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) IntelliSense configuration for your UE4 project. You can also build and hot reload your project (experimental). 
+
+Commands are run in a integrated terminal [shell](https://code.visualstudio.com/docs/editor/integrated-terminal#_configuration) so that the raw output is available. You can configure the [environment](https://code.visualstudio.com/updates/v1_15#_configure-environment-of-terminal-sessions) commands are run in.
 
 This extension should work on Windows, Linux, and Mac (untested).
 
@@ -25,13 +26,12 @@ Install
 
 2) Install the .vsix package. [[?]](https://code.visualstudio.com/docs/editor/extension-gallery#_install-from-a-vsix)
 
+3) Set the __ue4-cpptools.engineRootPath__ and any additional settings you need to configure the extension for you workspace. [[?]](https://code.visualstudio.com/docs/getstarted/settings)
+
 Usage
 -----
 
-1) Set the [required](#Required) settings and any additional settings you need to configure the extension for you workspace. [[?]](https://code.visualstudio.com/docs/getstarted/settings)
-
-2) Run [commands](#Commands) with the command pallette. [[?]](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette)
-
+Run commands with the command pallette. [[?]](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette)
 
 Commands
 --------
@@ -49,23 +49,28 @@ __UE4 CppTools - Hot Reload Project__ : Build project for editor HotReload
 
 Extension Settings
 ------------------
-### Required
+
+## Required
 __ue4-cpptools.engineRootPath__ : Path to Unreal Engine 4 root directory
 > You can alternately set the environment variable __UE4_ENGINE_ROOT_PATH__, but __engineRootPath__ setting will override it
 
-### Optional
+## Optional
+
 __ue4-cpptools.configurationName__ : Name of CppTools configuration to generate
 
 __ue4-cpptools.recycleTerminal__ : Controls terminal reuse for the extension
 
-### Advanced Settings (you probably shouldn't touch these)
-
 __ue4-cpptools.buildConfiguration__ : Unreal Build Tool build configuration
+
+## Advanced Settings (you probably shouldn't touch these)
+
+__ue4-cpptools.buildPlatform__ : Unreal Build Tool build platform
 
 __ue4-cpptools.overrideUnrealBuildTool__ : Override the command to run Unreal Build Tool
 
 Known Issues
 ------------
+
 [https://github.com/christopherreed/ue4-cpptools/issues](https://github.com/christopherreed/ue4-cpptools/issues)
 
 * Mac not tested

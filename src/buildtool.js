@@ -57,13 +57,6 @@ function runBuildTool(info, args, taskName) {
 function hotReloadProjectArgs() {
     let platformArgs = [];
 
-    let buildPlatforms = {
-        'linux' : 'Linux',
-        'win32' : 'Win64',
-        'darwin' : 'Mac'
-    };
-    let buildPlatform = buildPlatforms[process.platform];
-
     let rand = Math.floor(Math.random() * (22222 - 22 + 1)) + 22; // completely arbitrary ranges here
 
     let args = [
@@ -71,7 +64,7 @@ function hotReloadProjectArgs() {
         '-ModuleWithSuffix',
         info.projectName,
         rand,
-        buildPlatform,
+        info.buildPlatform,
         'Development',
         '-editorrecompile',
         '-canskiplink',
@@ -93,20 +86,15 @@ exports.hotReloadProject = hotReloadProject;
 function buildProjectArgs(info) {
     let platformArgs = [];
 
-    let buildPlatforms = {
-        'linux' : 'Linux',
-        'win32' : 'Win64',
-        'darwin' : 'Mac'
-    };
-    let buildPlatform = buildPlatforms[process.platform];
-
-    let buildConfiguration = info.buildConfiguration || 'Development';
-    let buildTarget = 'Editor'
+    let projectName = info.projectName;
+    if (info.buildForEditor) {
+        projectName = projectName.concat('Editor');
+    }
 
     let args = [
-        info.projectName + buildTarget,
-        buildPlatform,
-        buildConfiguration,
+        projectName,
+        info.buildPlatform,
+        info.buildConfiguration,
         info.projectFilePath
     ];
 
