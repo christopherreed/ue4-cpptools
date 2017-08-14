@@ -3,6 +3,7 @@ const path = require('path');
 const readline = require('readline');
 const vscode = require('vscode');
 const util = require('./util.js')
+const buildtool = require('./buildtool.js');
 
 function generateCppToolsIncludePathFromCodeLiteProject(info) {
     var completionFilename = path.join(info.projectPath, info.projectName + 'CodeCompletionFolders.txt');
@@ -145,6 +146,8 @@ function generateCppToolsConfiguration(configName) {
         };
 
         util.touchDirectory(vscodePath)
+
+        .then(_ => buildtool.execGenerateProjectFilesProcess(false, true))
 
         .then(_ => generateCppToolsIncludePathFromCodeLiteProject(info))
         .then((includePath) => {config.includePath = includePath;})

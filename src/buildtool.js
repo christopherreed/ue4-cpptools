@@ -15,7 +15,7 @@ function getUnrealBuildToolCommand(info) {
             
             fs.access(unrealBuildTool, (err) => {
                 if (err) {
-                    reject(`Faild to acces Unreal Build Tool '${unrealBuildTool}' : ${err}`);
+                    reject(`Failed to access Unreal Build Tool '${unrealBuildTool}' : ${err}`);
                 } else {
                     resolve(unrealBuildTool);
                 }
@@ -106,35 +106,62 @@ function buildProject() {
 }
 exports.buildProject = buildProject;
 
-function generateProjectFilesArgs(info, generateNativeProjectFiles=true) {
-    let platformArgs = [];
+function generateProjectFilesArgs(info, generateNativeProjectFiles=true, generateCodeLiteProjectFiles=false, generateEngineProjectFiles=false) {
+    let args = [];
 
     if (generateNativeProjectFiles) {
-        let nativeProjectFiles = {
-            'linux' : ['-makefile'],
-            'win32' : ['-projectfile'],
+        let nativeProjectFiles = { // TODO setting ue4-cpptool.nativeProjectFiles
+            'linux' : ['-makefile', '-kdevelopfile', '-qmakefile', '-cmakefile', '-codelitefile'],
+            'win32' : ['-projectfiles'],
             'darwin' : ['xcodeprojectfile']
         };
 
-        platformArgs = nativeProjectFiles[process.platform];
+        args = args.concat(nativeProjectFiles[process.platform]);
     }
 
-    let args = platformArgs.concat([
-        '-codelitefile',
+    if (generateCodeLiteProjectFiles) {
+        if (!args.find((v) => {return v == '-codelitefile'})) args.push('-codelitefile');
+    }
+
+    args = args.concat([
         '-project=',
         info.projectFilePath,
         '-game',
-        '-engine'
+        '-rocket'
     ]);
+
+    if (generateEngineProjectFiles) {
+        args.push('-engine');
+    }
 
     return args;
 }
 
 function generateProjectFiles() {
     util.getProjectInfo().then((info) => {
-        let args = generateProjectFilesArgs(info);
+        let args = generateProjectFilesArgs(info, true);
         
         runBuildTool(info, args, 'ue4-cpptools:GenerateProjectFiles');  
     });
 }
 exports.generateProjectFiles = generateProjectFiles;
+
+function execGenerateProjectFilesProcess(generateNativeProjectFiles=false, generateCodeLiteProjectFiles=false, generateEngineProjectFiles=false) {
+    return new Promise((resolve, reject) => {
+        util.getProjectInfo().then((info) => {
+            let args = generateProjectFilesArgs(info, generateNativeProjectFiles, generateCodeLiteProjectFiles, generateEngineProjectFiles);
+            
+            getBuildCommand(info, args).then((command) => {
+                terminal.execCommandInProcess(command.command, command.args).then(
+                (ok) => {
+                    resolve();
+                },(err) => {
+                    reject(`Failed to generate project files : Exited with error code ${err}`);
+                });
+            }).catch((err) => {
+                reject(err);
+            });
+        }); 
+    });
+}
+exports.execGenerateProjectFilesProcess = execGenerateProjectFilesProcess;
