@@ -1,4 +1,5 @@
 const vscode = require('vscode');
+const child_process = require('child_process');
 
 var terminals = {};
 
@@ -60,3 +61,18 @@ function runCommandInTerminal(command, args, terminalName) {
     terminal.sendText(commandStr);
 }
 exports.runCommandInTerminal = runCommandInTerminal;
+
+function execCommandInProcess(command, args) {
+    return new Promise((resolve, reject) => {
+        let commandStr = fixStringWithSpaces(command) + ' ' + buildArgsString(args);
+        
+        child_process.exec(commandStr, (err) => {
+            if (err) {
+                reject(err.code);
+            } else {
+                resolve(0);
+            }
+        });
+    });
+} 
+exports.execCommandInProcess = execCommandInProcess;
