@@ -106,11 +106,11 @@ function buildProject() {
 }
 exports.buildProject = buildProject;
 
-function generateProjectFilesArgs(info, generateNativeProjectFiles=true) {
+function generateProjectFilesArgs(info, generateNativeProjectFiles=true, generateCodeLiteProjectFiles=false, generateEngineProjectFiles=false) {
     let platformArgs = [];
 
     if (generateNativeProjectFiles) {
-        let nativeProjectFiles = {
+        let nativeProjectFiles = { // TODO setting ue4-cpptool.nativeProjectFiles
             'linux' : ['-makefile'],
             'win32' : ['-projectfile'],
             'darwin' : ['xcodeprojectfile']
@@ -123,9 +123,12 @@ function generateProjectFilesArgs(info, generateNativeProjectFiles=true) {
         '-codelitefile',
         '-project=',
         info.projectFilePath,
-        '-game',
-        '-engine'
+        '-game'
     ]);
+
+    if (generateEngineProjectFiles) {
+        args.push('-engine');
+    }
 
     return args;
 }
