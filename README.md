@@ -36,7 +36,7 @@ Run commands with the command pallette. [[?]](https://code.visualstudio.com/docs
 Commands
 --------
 
-__UE4 CppTools - Generate CppTools Configuration__ : Generate [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) configuration for your project. The configuration name can be specified with the __configurationName__ setting.
+__UE4 CppTools - Generate CppTools Configuration__ : Generate [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) configuration for your project. The configuration name can be specified with the __cppToolsConfiguration__ setting.
 
 __UE4 CppTools - Generate Project Files__ : Generate native project files for your project. [[?]](https://docs.unrealengine.com/latest/INT/Programming/UnrealBuildSystem/ProjectFileGenerator/index.html)
 
@@ -54,7 +54,7 @@ __ue4-cpptools.engineRootPath__ : Path to Unreal Engine 4 root directory
 
 ## Optional
 
-__ue4-cpptools.configurationName__ : Name of CppTools configuration to generate
+__ue4-cpptools.cppToolsConfiguration__ : Name of CppTools configuration to generate
 
 __ue4-cpptools.recycleTerminal__ : Controls terminal reuse for the extension
 

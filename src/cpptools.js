@@ -127,7 +127,7 @@ function generateCppToolsConfiguration(configName) {
         let vscodePath = path.join(info.projectPath, '.vscode');
         let cppToolsPropertiesFile = path.join(vscodePath, 'c_cpp_properties.json');
 
-        let configurationName = info.configurationName;
+        let configurationName = info.cppToolsConfiguration;
 
         if (!configurationName) {
             let configurationMap = {
