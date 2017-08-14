@@ -54,9 +54,7 @@ function runBuildTool(info, args, taskName) {
     });
 }
 
-function hotReloadProjectArgs() {
-    let platformArgs = [];
-
+function hotReloadProjectArgs(info) {
     let rand = Math.floor(Math.random() * (22222 - 22 + 1)) + 22; // completely arbitrary ranges here
 
     let args = [
@@ -76,7 +74,7 @@ function hotReloadProjectArgs() {
 
 function hotReloadProject() {
     util.getProjectInfo().then((info) => {
-        let args = buildProjectArgs(info);
+        let args = hotReloadProjectArgs(info);
         
         runBuildTool(info, args, 'ue4-cpptools:HotReloadProject');  
     });
@@ -84,15 +82,13 @@ function hotReloadProject() {
 exports.hotReloadProject = hotReloadProject;
 
 function buildProjectArgs(info) {
-    let platformArgs = [];
-
-    let projectName = info.projectName;
-    if (info.buildForEditor) {
-        projectName = projectName.concat('Editor');
+    let buildConfigurationTarget = info.buildConfigurationTarget;
+    if (!buildConfigurationTarget || buildConfigurationTarget == 'Executable') {
+        buildConfigurationTarget = '';
     }
-
+    
     let args = [
-        projectName,
+        info.projectName + buildConfigurationTarget,
         info.buildPlatform,
         info.buildConfiguration,
         info.projectFilePath

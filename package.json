@@ -78,15 +78,26 @@
                     "enum": [
                         "Development",
                         "DebugGame",
-                        "Development Editor",
-                        "DebugGame Editor",
-                        "Shipping"
+                        "Shipping",
+                        "Test"
                     ],
-                    "default": "Development Editor",
                     "description" : "Unreal Build Tool build configuration"
                 },
+                "ue4-cpptools.buildConfigurationTarget": {
+                    "enum": [
+                        "Editor",
+                        "Executable",
+                        "Client",
+                        "Server"
+                    ],
+                    "description" : "Unreal Build Tool build configuration target"
+                },
                 "ue4-cpptools.buildPlatform": {
-                    "type" : "string",
+                    "enum": [
+                        "Linux",
+                        "Win64",
+                        "Mac"
+                    ],
                     "description" : "Unreal Build Tool build platform"
                 }
             }
