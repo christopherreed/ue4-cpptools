@@ -11,6 +11,7 @@ function activate(context) {
     context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.generateProjectFiles', buildtool.generateProjectFiles));
     context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.buildProject', buildtool.buildProject));
     context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.hotReloadProject', buildtool.hotReloadProject));
+    context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.openTerminal', terminal.openTerminal));
 
     context.subscriptions.push(vscode.window.onDidCloseTerminal(term => {terminal.removeTerminal(term);}));
 }

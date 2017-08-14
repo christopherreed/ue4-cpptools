@@ -62,6 +62,13 @@ function runCommandInTerminal(command, args, terminalName) {
 }
 exports.runCommandInTerminal = runCommandInTerminal;
 
+function openTerminal(terminalName) {
+    let terminal = findTerminal(terminalName);
+    console.log(terminal);
+    terminal.show();
+}
+exports.openTerminal = openTerminal;
+
 function execCommandInProcess(command, args) {
     return new Promise((resolve, reject) => {
         let commandStr = fixStringWithSpaces(command) + ' ' + buildArgsString(args);

@@ -24,7 +24,8 @@
         "onCommand:ue4-cpptools.generateCppToolsConfiguration",
         "onCommand:ue4-cpptools.generateProjectFiles",
         "onCommand:ue4-cpptools.buildProject",
-        "onCommand:ue4-cpptools.hotReloadProject"
+        "onCommand:ue4-cpptools.hotReloadProject",
+        "onCommand:ue4-cpptools.openTerminal"
     ],
     "main": "./src/extension",
     "contributes": {
@@ -47,6 +48,11 @@
             {
                 "command": "ue4-cpptools.hotReloadProject",
                 "title": "Hot Reload Project",
+                "category": "UE4 Tools"
+            },
+            {
+                "command": "ue4-cpptools.openTerminal",
+                "title": "Open Terminal",
                 "category": "UE4 Tools"
             }
         ],

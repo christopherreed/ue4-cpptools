@@ -40,6 +40,8 @@ __UE4 CppTools - Generate CppTools Configuration__ : Generate [CppTools](https:/
 
 __UE4 CppTools - Generate Project Files__ : Generate native project files for your project. [[?]](https://docs.unrealengine.com/latest/INT/Programming/UnrealBuildSystem/ProjectFileGenerator/index.html)
 
+__UE4 CppTools - Open Terminal__ : Open __ue4-cpptools__ terminal
+
 __UE4 CppTools - Build Project__ : Build project. The build configuration can be specified with the __buildConfiguration__ and __buildConfigurationTarget__ settings. [[?]](https://docs.unrealengine.com/latest/INT/Programming/Development/CompilingProjects/index.html)
 
 __UE4 CppTools - Hot Reload Project__ : Build project for editor HotReload
