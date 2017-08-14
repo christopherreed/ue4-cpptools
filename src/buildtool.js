@@ -83,7 +83,7 @@ exports.hotReloadProject = hotReloadProject;
 
 function buildProjectArgs(info) {
     let buildConfigurationTarget = info.buildConfigurationTarget;
-    if (!buildConfigurationTarget || buildConfigurationTarget == 'Executable') {
+    if (!buildConfigurationTarget || buildConfigurationTarget == 'Game') {
         buildConfigurationTarget = '';
     }
     

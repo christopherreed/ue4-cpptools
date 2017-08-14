@@ -86,7 +86,7 @@
                 "ue4-cpptools.buildConfigurationTarget": {
                     "enum": [
                         "Editor",
-                        "Executable",
+                        "Game",
                         "Client",
                         "Server"
                     ],
