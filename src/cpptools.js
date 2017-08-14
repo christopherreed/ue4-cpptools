@@ -147,7 +147,7 @@ function generateCppToolsConfiguration(configName) {
 
         util.touchDirectory(vscodePath)
 
-        .then(_ => buildtool.execGenerateProjectFilesProcess(false, true))
+        .then(_ => buildtool.execGenerateProjectFilesProcess(false, true, true))
 
         .then(_ => generateCppToolsIncludePathFromCodeLiteProject(info))
         .then((includePath) => {config.includePath = includePath;})

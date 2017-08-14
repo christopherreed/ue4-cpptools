@@ -106,7 +106,7 @@ function buildProject() {
 }
 exports.buildProject = buildProject;
 
-function generateProjectFilesArgs(info, generateNativeProjectFiles=true, generateCodeLiteProjectFiles=false, generateEngineProjectFiles=false) {
+function generateProjectFilesArgs(info, generateNativeProjectFiles=true, generateCodeLiteProjectFiles=false, generateEngineProjectFiles=true) {
     let args = [];
 
     if (generateNativeProjectFiles) {
