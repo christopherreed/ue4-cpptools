@@ -36,13 +36,11 @@ Run commands with the command pallette. [[?]](https://code.visualstudio.com/docs
 Commands
 --------
 
-__UE4 CppTools - Generate Project Files__ : Generate CodeLite (used by __Generate CppTools Configuration__) and native project files for your project.
-
 __UE4 CppTools - Generate CppTools Configuration__ : Generate [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) configuration for your project. The configuration name can be specified with the __configurationName__ setting.
 
->NOTE: Run __Generate Project Files__ command to generate the CodeLite project files required by __Generate CppTools Configuration__
+__UE4 CppTools - Generate Project Files__ : Generate native project files for your project. [[?]](https://docs.unrealengine.com/latest/INT/Programming/UnrealBuildSystem/ProjectFileGenerator/index.html)
 
-__UE4 CppTools - Build Project__ : Build project. The build configuration can be specified with the __buildConfiguration__ setting.
+__UE4 CppTools - Build Project__ : Build project. The build configuration can be specified with the __buildConfiguration__ and __buildConfigurationTarget__ settings. [[?]](https://docs.unrealengine.com/latest/INT/Programming/Development/CompilingProjects/index.html)
 
 __UE4 CppTools - Hot Reload Project__ : Build project for editor HotReload
 > WARNING: __Build Project__ and __Hot Reload Project__ are completely experimental at this point
@@ -60,11 +58,13 @@ __ue4-cpptools.configurationName__ : Name of CppTools configuration to generate
 
 __ue4-cpptools.recycleTerminal__ : Controls terminal reuse for the extension
 
-__ue4-cpptools.buildConfiguration__ : Unreal Build Tool build configuration
-
 ## Advanced Settings (you probably shouldn't touch these)
 
 __ue4-cpptools.buildPlatform__ : Unreal Build Tool build platform
+
+__ue4-cpptools.buildConfiguration__ : Unreal Build Tool build configuration
+
+__ue4-cpptools.buildConfigurationTarget__ : Unreal Build Tool build configuration target
 
 __ue4-cpptools.overrideUnrealBuildTool__ : Override the command to run Unreal Build Tool
 
