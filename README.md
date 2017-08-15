@@ -42,7 +42,7 @@ __UE4 CppTools - Generate Project Files__ : Generate native project files for yo
 
 __UE4 CppTools - Open Terminal__ : Open __ue4-cpptools__ terminal
 
-__UE4 CppTools - Build Project__ : Build project. The build configuration can be specified with the __buildConfiguration__ and __buildConfigurationTarget__ settings. [[?]](https://docs.unrealengine.com/latest/INT/Programming/Development/CompilingProjects/index.html)
+__UE4 CppTools - Build Project__ : Build project. The build configuration can be specified with the __buildConfiguration__, __buildConfigurationTarget__, and __buildPlatform__ settings. [[?]](https://docs.unrealengine.com/latest/INT/Programming/Development/CompilingProjects/index.html)
 
 __UE4 CppTools - Hot Reload Project__ : Build project for editor HotReload
 > WARNING: __Build Project__ and __Hot Reload Project__ are completely experimental at this point
@@ -80,6 +80,8 @@ Known Issues
 * Relies on the Unreal Build Tool CodeLite project generator
 
 * Build / HotReload commands are experimental - input appreciated!
+
+* Build broken in 4.17.0
 
 License
 -------
