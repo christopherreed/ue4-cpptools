@@ -64,7 +64,6 @@ exports.runCommandInTerminal = runCommandInTerminal;
 
 function openTerminal(terminalName) {
     let terminal = findTerminal(terminalName);
-    console.log(terminal);
     terminal.show();
 }
 exports.openTerminal = openTerminal;
