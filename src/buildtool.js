@@ -32,7 +32,7 @@ function getBuildCommand(info, args) {
             resolve({'command':overrideUnrealBuildTool, 'args':args});
         } else {
             getUnrealBuildToolCommand(info).then((command) => {
-                if (process.platform == 'linux' || process.platform == 'mac') {
+                if (process.platform == 'linux' || process.platform == 'darwin') {
                     // Linux and Mac requires us to prepend 'mono'
                     args.unshift(command);
                     command = 'mono';
