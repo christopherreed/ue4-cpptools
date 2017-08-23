@@ -14,10 +14,18 @@ function getUnrealEditorCommand(info) {
             let platformPaths = {
                 'linux' : 'Linux',
                 'win32' : 'Win64',
-                'darwin' : 'IOS' // untested
+                'darwin' : 'Mac'
             };
             let platformPath = platformPaths[process.platform];
-            let unrealEditor = path.join(engineRootPath, 'Engine', 'Binaries', platformPath, 'UE4Editor.exe');
+
+            let executablePaths = {
+                'linux' : 'UE4Editor',
+                'win32' : 'UE4Editor.exe',
+                'darwin' : 'UE4Editor.app'
+            };
+            let executable = executablePaths[process.platform];
+
+            let unrealEditor = path.join(engineRootPath, 'Engine', 'Binaries', platformPath, executable);
             
             fs.access(unrealEditor, (err) => {
                 if (err) {
@@ -38,6 +46,13 @@ function getEditorCommand(info, args) {
             resolve({'command':overrideUnrealEditor, 'args':args});
         } else {
             getUnrealEditorCommand(info).then((command) => {
+                if (process.platform == 'darwin') {
+                    // untested
+                    args.unshift('--args');
+                    args.unshift(command);
+                    command = 'open';
+                }
+                
                 resolve({'command':command, 'args':args});
             }, (err) => {
                 reject(err);
