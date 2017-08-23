@@ -25,7 +25,9 @@
         "onCommand:ue4-cpptools.generateProjectFiles",
         "onCommand:ue4-cpptools.buildProject",
         "onCommand:ue4-cpptools.hotReloadProject",
-        "onCommand:ue4-cpptools.openTerminal"
+        "onCommand:ue4-cpptools.openTerminal",
+        "onCommand:ue4-cpptools.openProjectWithEditor",
+        "onCommand:ue4-cpptools.runProjectWithEditor"
     ],
     "main": "./src/extension",
     "contributes": {
@@ -53,6 +55,16 @@
             {
                 "command": "ue4-cpptools.openTerminal",
                 "title": "Open Terminal",
+                "category": "UE4 Tools"
+            },
+            {
+                "command": "ue4-cpptools.openProjectWithEditor",
+                "title": "Open Project With Unreal Editor",
+                "category": "UE4 Tools"
+            },
+            {
+                "command": "ue4-cpptools.runProjectWithEditor",
+                "title": "Run Project With Unreal Editor",
                 "category": "UE4 Tools"
             }
         ],
@@ -105,6 +117,10 @@
                         "Mac"
                     ],
                     "description" : "Unreal Build Tool build platform"
+                },
+                "ue4-cpptools.overrideUnrealEditor": {
+                    "type": "string",
+                    "description": "Override the command to run Unreal Editor"
                 }
             }
         }

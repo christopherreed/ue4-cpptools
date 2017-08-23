@@ -55,6 +55,8 @@ function getProjectInfo() {
             buildPlatform = buildPlatforms[process.platform]; 
         }
         
+        let overrideUnrealEditor = vscode.workspace.getConfiguration('ue4-cpptools').get('overrideUnrealEditor');
+
         let info = {
             'projectPath' : projectPath,
             'projectName' : projectName,
@@ -69,7 +71,9 @@ function getProjectInfo() {
 
             'buildConfigurationTarget' : buildConfigurationTarget,
 
-            'buildPlatform' : buildPlatform
+            'buildPlatform' : buildPlatform,
+
+            'overrideUnrealEditor' : overrideUnrealEditor
         };
 
         resolve(info);

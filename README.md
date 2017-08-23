@@ -15,7 +15,7 @@ Features
 
 The goal is to supply some tools to make it a little easier to use VSCode as your IDE to edit code from Unreal Editor 4. Currently you can use it to generate a [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) IntelliSense configuration for your UE4 project. You can also build and hot reload your project (experimental). 
 
-Commands are run in a integrated terminal [shell](https://code.visualstudio.com/docs/editor/integrated-terminal#_configuration) so that the raw output is available. You can configure the [environment](https://code.visualstudio.com/updates/v1_15#_configure-environment-of-terminal-sessions) commands are run in.
+Most commands are run in a integrated terminal [shell](https://code.visualstudio.com/docs/editor/integrated-terminal#_configuration) so that the raw output is available. You can configure the [environment](https://code.visualstudio.com/updates/v1_15#_configure-environment-of-terminal-sessions) commands are run in.
 
 This extension should work on Windows, Linux, and Mac (untested).
 
@@ -36,16 +36,23 @@ Run commands with the command pallette. [[?]](https://code.visualstudio.com/docs
 Commands
 --------
 
-__UE4 CppTools - Generate CppTools Configuration__ : Generate [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) configuration for your project. The configuration name can be specified with the __cppToolsConfiguration__ setting.
+__UE4 CppTools - Generate CppTools Configuration__ : Generate [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) configuration for your project.
+> The configuration name can be specified with the __cppToolsConfiguration__ setting.
 
 __UE4 CppTools - Generate Project Files__ : Generate native project files for your project. [[?]](https://docs.unrealengine.com/latest/INT/Programming/UnrealBuildSystem/ProjectFileGenerator/index.html)
 
 __UE4 CppTools - Open Terminal__ : Open __ue4-cpptools__ terminal
 
-__UE4 CppTools - Build Project__ : Build project. The build configuration can be specified with the __buildConfiguration__, __buildConfigurationTarget__, and __buildPlatform__ settings. [[?]](https://docs.unrealengine.com/latest/INT/Programming/Development/CompilingProjects/index.html)
+__UE4 CppTools - Build Project__ : Build project.
+> The build configuration can be specified with the __buildConfiguration__, __buildConfigurationTarget__, and __buildPlatform__ settings. [[?]](https://docs.unrealengine.com/latest/INT/Programming/Development/CompilingProjects/index.html)
 
-__UE4 CppTools - Hot Reload Project__ : Build project for editor HotReload
+__UE4 CppTools - Hot Reload Project__ : Build project for Unreal Editor HotReload
 > WARNING: __Build Project__ and __Hot Reload Project__ are completely experimental at this point
+
+__UE4 CppTools - Open Project With Unreal Editor__ : Open project with Unreal Editor
+
+__UE4 CppTools - Run Project With Unreal Editor__ : Run an uncooked project build with Unreal Editor.
+> The build configuration can be specified with __buildConfiguration__ as __Developement__ or __DebugGame__ 
 
 Extension Settings
 ------------------
@@ -69,6 +76,8 @@ __ue4-cpptools.buildConfigurationTarget__ : Unreal Build Tool build configuratio
 __ue4-cpptools.buildPlatform__ : Unreal Build Tool build platform
 
 __ue4-cpptools.overrideUnrealBuildTool__ : Override the command to run Unreal Build Tool
+
+__ue4-cpptools.overrideUnrealEditor__ : Override the command to run Unreal Editor
 
 Known Issues
 ------------
