@@ -54,6 +54,8 @@ __UE4 CppTools - Open Project With Unreal Editor__ : Open project with Unreal Ed
 __UE4 CppTools - Run Project With Unreal Editor__ : Run an uncooked project build with Unreal Editor.
 > The build configuration can be specified with __buildConfiguration__ as __Developement__ or __DebugGame__ 
 
+__UE4 CppTools - Search Unreal Engine Online Documenation__ : Search Unreal Engine online documentation
+
 Extension Settings
 ------------------
 

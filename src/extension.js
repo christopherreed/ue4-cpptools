@@ -15,7 +15,8 @@ function activate(context) {
     context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.openTerminal', terminal.openTerminal));
     context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.openProjectWithEditor', editor.openProjectWithEditor));
     context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.runProjectWithEditor', editor.runProjectWithEditor));
-    
+    context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.searchOnlineDocumentation', editor.searchOnlineDocumentation));
+
     context.subscriptions.push(vscode.window.onDidCloseTerminal(term => {terminal.removeTerminal(term);}));
 }
 

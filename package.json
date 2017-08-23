@@ -27,7 +27,8 @@
         "onCommand:ue4-cpptools.hotReloadProject",
         "onCommand:ue4-cpptools.openTerminal",
         "onCommand:ue4-cpptools.openProjectWithEditor",
-        "onCommand:ue4-cpptools.runProjectWithEditor"
+        "onCommand:ue4-cpptools.runProjectWithEditor",
+        "onCommand:ue4-cpptools.searchOnlineDocumentation"
     ],
     "main": "./src/extension",
     "contributes": {
@@ -65,6 +66,11 @@
             {
                 "command": "ue4-cpptools.runProjectWithEditor",
                 "title": "Run Project With Unreal Editor",
+                "category": "UE4 Tools"
+            },
+            {
+                "command": "ue4-cpptools.searchOnlineDocumentation",
+                "title": "Search Unreal Engine Online Documenation",
                 "category": "UE4 Tools"
             }
         ],
