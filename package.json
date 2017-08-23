@@ -96,6 +96,7 @@
                     "enum": [
                         "Development",
                         "DebugGame",
+                        "Debug",
                         "Shipping",
                         "Test"
                     ],
