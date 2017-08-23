@@ -1,6 +1,23 @@
 Change Log
 ==========
 
+v0.0.4
+------
+
+Implemented Open Project With Editor command
+
+Implemented Run Project With Editor command
+
+Added setting overrideUnrealEditor
+
+Implemented Search Online Documentation command
+
+Fixed build commands on Mac - untested
+
+Added Debug buildConfiguration
+
+Fixed HotReload command for DebugGame buildConfiguration
+
 v0.0.3
 ------
 
