@@ -98,6 +98,7 @@ function openProjectWithEditor() {
                 launchEditor(info, args).catch((err) => {
                     vscode.window.showErrorMessage(`Failed to open project with editor : ${err}`);
                 });
+                util.showIndicator(`Open Project With Unreal Editor : ${selected}`);
             }
         }); 
     });
@@ -128,6 +129,7 @@ function runProjectWithEditor() {
                 launchEditor(info, args).catch((err) => {
                     vscode.window.showErrorMessage(`Failed to run project with editor : ${err}`);
                 });
+                util.showIndicator(`Run Project With Unreal Editor : ${selected}`);
             }
         }); 
     });
