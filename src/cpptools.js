@@ -145,27 +145,28 @@ function generateCppToolsConfiguration(configName) {
             'browse' : {}
         };
 
-        util.touchDirectory(vscodePath)
+        vscode.window.withProgress({'title':'Generate CppTools Configuration', 'location':vscode.ProgressLocation.Window}, (progress) => {
+            return util.touchDirectory(vscodePath)
 
-        .then(_ => buildtool.execGenerateProjectFilesProcess(false, true, true))
+            .then(_ => buildtool.execGenerateProjectFilesProcess(false, true, true))
 
-        .then(_ => generateCppToolsIncludePathFromCodeLiteProject(info))
-        .then((includePath) => {config.includePath = includePath;})
+            .then(_ => generateCppToolsIncludePathFromCodeLiteProject(info))
+            .then((includePath) => {config.includePath = includePath;})
 
-        .then(_ => generateCppToolsDefinesFromCodeLiteProject(info))
-        .then((defines) => {config.defines = defines;})
-        
-        .then(_ => generateCppToolsBrowse(info))
-        .then((browse) => {config.browse = browse;})
+            .then(_ => generateCppToolsDefinesFromCodeLiteProject(info))
+            .then((defines) => {config.defines = defines;})
+            
+            .then(_ => generateCppToolsBrowse(info))
+            .then((browse) => {config.browse = browse;})
 
-        .then(_ => writeCppToolsPropertiesFile(cppToolsPropertiesFile, config))
+            .then(_ => writeCppToolsPropertiesFile(cppToolsPropertiesFile, config))
 
-        .then(
-            (ok) => {}, 
-            (err) => {vscode.window.showErrorMessage(`Failed to generate configuration : ${err}`);}
-        )
-    }, err => console.error(err))
-    .catch(err => console.error(`Exception has occurred:\n${err}`));   
+            .then(
+                (ok) => {}, 
+                (err) => {vscode.window.showErrorMessage(`Failed to generate configuration : ${err}`);}
+            )}
+        );
+    });   
     
 }
 exports.generateCppToolsConfiguration = generateCppToolsConfiguration;
