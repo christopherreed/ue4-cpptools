@@ -80,3 +80,14 @@ function getProjectInfo() {
     });
 }
 exports.getProjectInfo = getProjectInfo;
+
+function showIndicator(title, duration=2500) {
+    return vscode.window.withProgress({'title':title, 'location':vscode.ProgressLocation.Window}, (progress) => {
+        return new Promise((resolve) => {
+            setInterval(() => {
+                resolve();
+            }, duration);
+        });
+    });
+}
+exports.showIndicator = showIndicator;
