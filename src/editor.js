@@ -83,16 +83,23 @@ function openProjectWithEditor() {
 
         let buildConfiguration = info.buildConfiguration;
         
+        // These are the only valid build configurations to open with editor, default to DebugGame if it is the current buildConfiguration
+        let items = ['Development', 'DebugGame'];
         if (buildConfiguration == 'DebugGame') {
-            args.push('-debug');
-            vscode.window.showInformationMessage(`Opening project build 'DebugGame', your current build configuration`);
-        } else if (buildConfiguration != 'Development') {
-            vscode.window.showWarningMessage(`Opening project build 'Development', not your current build configuration '${buildConfiguration}'`);
-        }
-
-        launchEditor(info, args).catch((err) => {
-            vscode.window.showErrorMessage(`Failed to open project with editor : ${err}`);
-        });
+            items = ['DebugGame', 'Development'];
+        } 
+        
+        vscode.window.showQuickPick(items, {'placeHolder' : 'Select build configuration to open with Unreal Editor'}).then((selected) => {
+            if (selected) {
+                if (selected == 'DebugGame') {
+                    args.push('-debug');
+                }
+        
+                launchEditor(info, args).catch((err) => {
+                    vscode.window.showErrorMessage(`Failed to open project with editor : ${err}`);
+                });
+            }
+        }); 
     });
 }
 exports.openProjectWithEditor = openProjectWithEditor;
@@ -106,16 +113,23 @@ function runProjectWithEditor() {
 
         let buildConfiguration = info.buildConfiguration;
 
+        // These are the only valid build configurations to run with editor, default to DebugGame if it is the current buildConfiguration
+        let items = ['Development', 'DebugGame'];
         if (buildConfiguration == 'DebugGame') {
-            args.push('-debug');
-            vscode.window.showInformationMessage(`Running project build 'DebugGame', your current build configuration`);
-        } else if (buildConfiguration != 'Development') {
-            vscode.window.showWarningMessage(`Running project build 'Development', not your current build configuration '${buildConfiguration}'`);
-        }
+            items = ['DebugGame', 'Development'];
+        } 
         
-        launchEditor(info, args).catch((err) => {
-            vscode.window.showErrorMesage(`Failed to run project with editor : ${err}`);
-        });
+        vscode.window.showQuickPick(items, {'placeHolder' : 'Select build configuration to run with Unreal Editor'}).then((selected) => {
+            if (selected) {
+                if (selected == 'DebugGame') {
+                    args.push('-debug');
+                }
+        
+                launchEditor(info, args).catch((err) => {
+                    vscode.window.showErrorMessage(`Failed to run project with editor : ${err}`);
+                });
+            }
+        }); 
     });
 }
 exports.runProjectWithEditor = runProjectWithEditor;

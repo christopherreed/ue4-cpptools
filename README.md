@@ -51,9 +51,9 @@ __UE4 CppTools - Build Project__ : Build project. The build configuration matrix
 
 __UE4 CppTools - Hot Reload Project__ : Build project for Unreal Editor HotReload. The build configuration can be specified with *buildConfiguration* as *Developement* or *DebugGame*.
 
-__UE4 CppTools - Open Project With Unreal Editor__ : Open project with Unreal Editor. The build configuration can be specified with *buildConfiguration* as *Developement* or *DebugGame*.
+__UE4 CppTools - Open Project With Unreal Editor__ : Open project with Unreal Editor.
 
-__UE4 CppTools - Run Project With Unreal Editor__ : Run an uncooked project build with Unreal Editor. The build configuration can be specified with *buildConfiguration* as *Developement* or *DebugGame*.
+__UE4 CppTools - Run Project With Unreal Editor__ : Run an uncooked project build with Unreal Editor.
 
 __UE4 CppTools - Search Unreal Engine Online Documenation__ : Search Unreal Engine 4 online documentation.
 
