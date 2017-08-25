@@ -34,7 +34,7 @@ Install
 Usage
 -----
 
-Use the command pallette to run commands. [[?]](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette)
+Use the command palette to run commands. [[?]](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette)
 
 Commands
 --------
