@@ -74,7 +74,11 @@ function execCommandInProcess(command, args) {
         
         child_process.exec(commandStr, (err) => {
             if (err) {
-                reject(err.code);
+                if (err.code) {
+                    reject(err.code);
+                } else {
+                    resolve(undefined); // ignore errors, without an error code - probably a killed process
+                }
             } else {
                 resolve(0);
             }
