@@ -55,7 +55,7 @@ __UE4 CppTools - Open Project With Unreal Editor__ : Open project with Unreal Ed
 
 __UE4 CppTools - Run Project With Unreal Editor__ : Run an uncooked project build with Unreal Editor.
 
-__UE4 CppTools - Search Unreal Engine Online Documenation__ : Search Unreal Engine 4 online documentation.
+__UE4 CppTools - Search Unreal Engine Online Documentation__ : Search Unreal Engine 4 online documentation.
 
 Extension Settings
 ------------------
