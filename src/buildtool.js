@@ -114,7 +114,8 @@ function buildProject() {
     util.getProjectInfo().then((info) => {
         let args = buildProjectArgs(info);
         
-        runBuildTool(info, args, 'ue4-cpptools:BuildProject');  
+        runBuildTool(info, args, 'ue4-cpptools:BuildProject');
+        util.showIndicator(`Build Project : ${info.buildPlatform} ${info.buildConfiguration} ${info.buildConfigurationTarget}`)
     });
 }
 exports.buildProject = buildProject;
@@ -154,7 +155,8 @@ function generateProjectFiles() {
     util.getProjectInfo().then((info) => {
         let args = generateProjectFilesArgs(info, true);
         
-        runBuildTool(info, args, 'ue4-cpptools:GenerateProjectFiles');  
+        runBuildTool(info, args, 'ue4-cpptools:GenerateProjectFiles');
+        util.showIndicator('Generate Project Files');
     });
 }
 exports.generateProjectFiles = generateProjectFiles;
