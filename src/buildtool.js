@@ -54,46 +54,6 @@ function runBuildTool(info, args, taskName) {
     });
 }
 
-function hotReloadProjectArgs(info) {
-    let rand = Math.floor(Math.random() * (22222 - 22 + 1)) + 22; // completely arbitrary ranges here
-
-    let buildConfiguration = info.buildConfiguration;
-    if (buildConfiguration != 'DebugGame') {
-        buildConfiguration = 'Development'
-    }
-
-    let args = [
-        info.projectName,
-        '-ModuleWithSuffix',
-        info.projectName,
-        rand,
-        info.buildPlatform,
-        buildConfiguration,
-        '-editorrecompile',
-        '-canskiplink',
-        info.projectFilePath
-    ];
-
-    return args;
-}
-
-function hotReloadProject() {
-    util.getProjectInfo().then((info) => {
-        let args = hotReloadProjectArgs(info);
-        
-        let buildConfiguration = info.buildConfiguration;
-
-        if (buildConfiguration == 'DebugGame') {
-            vscode.window.showInformationMessage(`HotReload project build 'DebugGame', your current build configuration`);
-        } else if (buildConfiguration != 'Development') {
-            vscode.window.showWarningMessage(`HotReload project build 'Development', not your current build configuration '${buildConfiguration}'`);
-        }
-
-        runBuildTool(info, args, 'ue4-cpptools:HotReloadProject');  
-    });
-}
-exports.hotReloadProject = hotReloadProject;
-
 function buildProjectArgs(info) {
     let buildConfigurationTarget = info.buildConfigurationTarget;
     if (!buildConfigurationTarget || buildConfigurationTarget == 'Game') {

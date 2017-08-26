@@ -24,7 +24,6 @@
         "onCommand:ue4-cpptools.generateCppToolsConfiguration",
         "onCommand:ue4-cpptools.generateProjectFiles",
         "onCommand:ue4-cpptools.buildProject",
-        "onCommand:ue4-cpptools.hotReloadProject",
         "onCommand:ue4-cpptools.openTerminal",
         "onCommand:ue4-cpptools.openProjectWithEditor",
         "onCommand:ue4-cpptools.runProjectWithEditor",
@@ -46,11 +45,6 @@
             {
                 "command": "ue4-cpptools.buildProject",
                 "title": "Build Project",
-                "category": "UE4 Tools"
-            },
-            {
-                "command": "ue4-cpptools.hotReloadProject",
-                "title": "Hot Reload Project",
                 "category": "UE4 Tools"
             },
             {

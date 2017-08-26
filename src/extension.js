@@ -12,7 +12,6 @@ function activate(context) {
     context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.generateCppToolsConfiguration', cpptools.generateCppToolsConfiguration));
     context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.generateProjectFiles', buildtool.generateProjectFiles));
     context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.buildProject', buildtool.buildProject));
-    context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.hotReloadProject', buildtool.hotReloadProject));
     context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.openTerminal', terminal.openTerminal));
     context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.openProjectWithEditor', editor.openProjectWithEditor));
     context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.runProjectWithEditor', editor.runProjectWithEditor));

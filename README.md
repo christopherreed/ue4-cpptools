@@ -16,7 +16,7 @@ This extension shouldn't be used in a production environment. Things will probab
 Features
 --------
 
-This extension is intended to supply some tools to make it easier to use VSCode as your IDE to edit C++ code for an Unreal Engine 4 project. Currently you can use it to generate a [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) IntelliSense configuration for your UE4 project. You can also build and hot reload your project. This extension can open your project in the Unreal Editor and run uncooked builds of your project. There is also a command to search the Unreal Engine 4 online documenation.
+This extension is intended to supply some tools to make it easier to use VSCode as your IDE to edit C++ code for an Unreal Engine 4 project. Currently you can use it to generate a [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) IntelliSense configuration for your UE4 project. You can also build your project. This extension can open your project in the Unreal Editor and run uncooked builds of your project. There is also a command to search the Unreal Engine 4 online documenation.
 
 Most commands are run in a integrated terminal [shell](https://code.visualstudio.com/docs/editor/integrated-terminal#_configuration) so that the raw output is available. You can configure the [environment](https://code.visualstudio.com/updates/v1_15#_configure-environment-of-terminal-sessions) commands are run in.
 
@@ -48,8 +48,6 @@ __UE4 CppTools - Open Terminal__ : Open the *ue4-cpptools* terminal.
 __UE4 CppTools - Build Project__ : Build project. The build configuration matrix can be specified with the *buildConfiguration*, *buildConfigurationTarget*, and *buildPlatform* settings.
 
 >__NOTE__: This command will only *build* your project; it won't do asset cooking, packaging, or anything else that might be required for your particular build configuration.
-
-__UE4 CppTools - Hot Reload Project__ : Build project for Unreal Editor HotReload. The build configuration can be specified with *buildConfiguration* as *Developement* or *DebugGame*.
 
 __UE4 CppTools - Open Project With Unreal Editor__ : Open project with Unreal Editor.
 
