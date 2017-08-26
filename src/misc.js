@@ -1,4 +1,5 @@
 const vscode = require('vscode');
+const util = require('./util.js');
 
 function searchOnlineDocumentation() {
     let query = undefined;
@@ -19,6 +20,7 @@ function searchOnlineDocumentation() {
             } else {
                 vscode.commands.executeCommand('vscode.open', vscode.Uri.parse('https://docs.unrealengine.com/latest/INT/'));
             }
+            util.showIndicator(`Search Unreal Engine Online Documentation : ${query ? query : 'Documentation'}`);
         }
     });
 }
