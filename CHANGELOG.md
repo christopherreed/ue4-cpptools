@@ -1,6 +1,21 @@
 Change Log
 ==========
 
+v0.0.5
+------
+
+Implemented Clean Project command
+
+Implemented Rebuild Project command
+
+Removed HotReload command
+
+Added working indicator for commands
+
+Changed Run Project With Unreal Editor to prompt for build configuration
+
+Changed Open Project With Unreal Editor to prompt for build configuration
+
 v0.0.4
 ------
 
