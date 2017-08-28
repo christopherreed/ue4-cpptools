@@ -24,6 +24,8 @@
         "onCommand:ue4-cpptools.generateCppToolsConfiguration",
         "onCommand:ue4-cpptools.generateProjectFiles",
         "onCommand:ue4-cpptools.buildProject",
+        "onCommand:ue4-cpptools.cleanProject",
+        "onCommand:ue4-cpptools.rebuildProject",
         "onCommand:ue4-cpptools.openTerminal",
         "onCommand:ue4-cpptools.openProjectWithEditor",
         "onCommand:ue4-cpptools.runProjectWithEditor",
@@ -45,6 +47,16 @@
             {
                 "command": "ue4-cpptools.buildProject",
                 "title": "Build Project",
+                "category": "UE4 Tools"
+            },
+            {
+                "command": "ue4-cpptools.cleanProject",
+                "title": "Clean Project",
+                "category": "UE4 Tools"
+            },
+            {
+                "command": "ue4-cpptools.rebuildProject",
+                "title": "Rebuild Project",
                 "category": "UE4 Tools"
             },
             {

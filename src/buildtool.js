@@ -140,3 +140,39 @@ function execGenerateProjectFilesProcess(generateNativeProjectFiles=false, gener
     });
 }
 exports.execGenerateProjectFilesProcess = execGenerateProjectFilesProcess;
+
+function cleanProject() {
+    util.getProjectInfo().then((info) => {
+        let args = buildProjectArgs(info);
+        args.push('-clean');
+
+        runBuildTool(info, args, 'ue4-cpptools:BuildProject');
+        util.showIndicator(`Clean Project : ${info.buildPlatform} ${info.buildConfiguration} ${info.buildConfigurationTarget}`);
+    });
+}
+exports.cleanProject = cleanProject;
+
+function rebuildProject() {
+    util.getProjectInfo().then((info) => {
+        let args = buildProjectArgs(info);
+        args.push('-clean');
+
+        getBuildCommand(info, args).then((command) => {
+            return vscode.window.withProgress({'title':`Clean Project : ${info.buildPlatform} ${info.buildConfiguration} ${info.buildConfigurationTarget}`, 'location':vscode.ProgressLocation.Window}, (progress) => {
+                return new Promise((resolve, reject) => {
+                    terminal.execCommandInProcess(command.command, command.args).then(
+                    (ok) => {
+                        resolve();
+                    },(err) => {
+                        reject(`Failed to clean project : Exited with error code ${err}`);
+                    });
+                });
+            });
+        }).then(_ => {
+            buildProject();
+        }).catch((err) => {
+            reject(err);
+        });
+    });  
+}
+exports.rebuildProject = rebuildProject;

@@ -49,6 +49,10 @@ __UE4 CppTools - Build Project__ : Build project. The build configuration matrix
 
 >__NOTE__: This command will only *build* your project; it won't do asset cooking, packaging, or anything else that might be required for your particular build configuration.
 
+__UE4 CppTools - Clean Project__ : Clean project.
+
+__UE4 CppTools - Rebuild Project__ : Clean and build project.
+
 __UE4 CppTools - Open Project With Unreal Editor__ : Open project with Unreal Editor.
 
 __UE4 CppTools - Run Project With Unreal Editor__ : Run an uncooked project build with Unreal Editor.
