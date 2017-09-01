@@ -87,7 +87,7 @@ function generateProjectFilesArgs(info, generateNativeProjectFiles=true, generat
         let nativeProjectFiles = { // TODO setting ue4-cpptool.nativeProjectFiles
             'linux' : ['-makefile', '-kdevelopfile', '-qmakefile', '-cmakefile', '-codelitefile'],
             'win32' : ['-projectfiles'],
-            'darwin' : ['xcodeprojectfile']
+            'darwin' : ['-xcodeprojectfile']
         };
 
         args = args.concat(nativeProjectFiles[process.platform]);
