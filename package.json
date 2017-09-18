@@ -2,7 +2,7 @@
     "name": "ue4-cpptools",
     "displayName": "ue4-cpptools",
     "description": "VSCode Tools for working with Unreal Engine 4 C++ projects",
-    "version": "0.0.5",
+    "version": "0.1.0",
     "preview" : true,
     "publisher": "christopherreed",
     "repository": {
