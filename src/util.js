@@ -19,11 +19,20 @@ exports.touchDirectory = touchDirectory;
 
 function getProjectInfo() {
     return new Promise((resolve, reject) => {
-        let projectPath = vscode.workspace.rootPath;
-        if (!projectPath) {
-            reject('No vscode workspace');
+        let workspaceFolders = vscode.workspace.workspaceFolders;
+
+        if (!workspaceFolders || !workspaceFolders[0]) {
+            reject('No workspace folder open');
             return;
         }
+
+        let uri = workspaceFolders[0].uri;
+        if (!uri || !uri.fsPath) {
+            reject('Invalid workspace folder path');
+            return;
+        }
+        
+        let projectPath = uri.fsPath;
 
         let projectName = projectPath.slice(projectPath.lastIndexOf(path.sep) + 1);
         if (!projectName || projectName.length < 1) {
