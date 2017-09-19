@@ -23,7 +23,8 @@
     "activationEvents": [
         "onCommand:ue4-cpptools.generateCppToolsConfiguration",
         "onCommand:ue4-cpptools.searchOnlineDocumentation",
-        "onCommand:ue4-cpptools.generateTaskConfigurations"
+        "onCommand:ue4-cpptools.generateTaskConfigurations",
+        "onCommand:ue4-cpptools.generateDebugConfigurations"
     ],
     "main": "./src/extension",
     "contributes": {
@@ -41,6 +42,11 @@
             {
                 "command": "ue4-cpptools.generateTaskConfigurations",
                 "title": "Generate Task Configurations",
+                "category": "UE4 Tools"
+            },
+            {
+                "command": "ue4-cpptools.generateDebugConfigurations",
+                "title": "Generate Debug Configurations",
                 "category": "UE4 Tools"
             }
         ],

@@ -7,12 +7,14 @@ const terminal = require('./terminal.js');
 const editor = require('./editor.js');
 const misc = require('./misc.js');
 const tasks = require('./tasks.js');
+const debug = require('./debug.js');
 
 function activate(context) {
 
     context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.generateCppToolsConfiguration', cpptools.generateCppToolsConfiguration));
     context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.generateTaskConfigurations', tasks.generateTaskConfigurations));
     context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.searchOnlineDocumentation', misc.searchOnlineDocumentation));
+    context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.generateDebugConfigurations', debug.generateDebugConfigurations));
 
     context.subscriptions.push(vscode.window.onDidCloseTerminal(term => {terminal.removeTerminal(term);}));
 }
