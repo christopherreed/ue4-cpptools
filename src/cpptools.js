@@ -83,7 +83,7 @@ function writeCppToolsPropertiesFile(cppToolsPropertiesFile, config) {
             let configurations = json.configurations || [];
 
             if (Array.isArray(configurations)) {
-                let preventConfigOverwrite = false; // TODO setting
+                let preventConfigOverwrite = true; // TODO setting
                 let foundConfig = -1;
 
                 for (i in configurations) {

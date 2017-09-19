@@ -3,7 +3,6 @@
 const vscode = require('vscode');
 const cpptools = require('./cpptools.js');
 const buildtool = require('./buildtool.js');
-const terminal = require('./terminal.js');
 const editor = require('./editor.js');
 const misc = require('./misc.js');
 const tasks = require('./tasks.js');

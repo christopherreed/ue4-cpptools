@@ -2,7 +2,7 @@ const vscode = require('vscode');
 const path = require('path');
 const fs = require('fs');
 const util = require('./util.js');
-const terminal = require('./terminal.js');
+const command = require('./command.js');
 
 function getUnrealBuildToolCommand(info) {
     return new Promise((resolve, reject) => {
@@ -117,8 +117,8 @@ function execGenerateProjectFilesProcess(generateNativeProjectFiles=false, gener
         util.getProjectInfo().then((info) => {
             let args = getGenerateProjectFilesArgs(info, generateNativeProjectFiles, generateCodeLiteProjectFiles, generateEngineProjectFiles);
             
-            getBuildCommand(info, args).then((command) => {
-                terminal.execCommandInProcess(command.command, command.args).then(
+            getBuildCommand(info, args).then((buildCommand) => {
+                command.execCommandInProcess(buildCommand.command, buildCommand.args).then(
                 (ok) => {
                     resolve();
                 },(err) => {

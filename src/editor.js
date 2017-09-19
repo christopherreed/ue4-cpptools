@@ -2,7 +2,6 @@ const vscode = require('vscode');
 const path = require('path');
 const fs = require('fs');
 const util = require('./util.js');
-const terminal = require('./terminal.js');
 
 function getUnrealEditorCommand(info) {
     return new Promise((resolve, reject) => {
