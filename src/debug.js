@@ -22,43 +22,30 @@ function generateDebugConfigurations() {
             let launchConfigs = [];
             let launchType = (currentSystem == 'windows') ? 'cppvsdbg' : 'cppdbg';
 
-            // For these configurations we supply a top-level 'program' and 'type' and an overload per-platform - vscode gets confused otherwise, probably a bug
             launchConfigs.push({
-                'name': `Attach Editor ${info.projectName} : DebugGame Editor`,
-                'program' : launchCommand, // overloaded per platform
-                'type':'cppdbg', // overloaded per platform
+                'name': `${info.configurationName} : Attach Editor ${info.projectName} [DebugGame Editor]`,
+                'program' : launchCommand,
+                'type': launchType,
                 'request': 'attach',
-                'processId': '${command:pickProcess}',
-                [currentSystem]: {
-                    'program': launchCommand,
-                    'type':launchType
-                }
+                'processId': '${command:pickProcess}'
             });
 
             launchConfigs.push({
-                'name':`Launch Editor ${info.projectName} : DebugGame Editor`,
-                'program' : launchCommand, // overloaded per platform
-                'type': 'cppdbg', // overloaded per platform
+                'name':`${info.configurationName} : Launch Editor ${info.projectName} [DebugGame Editor]`,
+                'program' : launchCommand,
+                'type':launchType,
+                'args' : launchArgs,
                 'request': 'launch',
-                'cwd': '${workspaceRoot}',
-                [currentSystem] : {
-                    'program': launchCommand,
-                    'args' : launchArgs,
-                    'type':launchType
-                }
+                'cwd': '${workspaceRoot}'                
             });
 
             launchConfigs.push({
-                'name':`Launch ${info.projectName} : DebugGame Editor`,
-                'program' : launchCommand, // overloaded per platform
-                'type': 'cppdbg', // overloaded per platform
+                'name':`${info.configurationName} : Launch ${info.projectName} [DebugGame Editor]`,
+                'program' : launchCommand,
+                'type':launchType,
+                'args' : launchArgs.concat('-game'),
                 'request': 'launch',
-                'cwd': '${workspaceRoot}',
-                [currentSystem] : {
-                    'program' : launchCommand,
-                    'args' : launchArgs.concat('-game'),
-                    'type':launchType
-                }
+                'cwd': '${workspaceRoot}'
             });
 
             let launchConfiguration = vscode.workspace.getConfiguration('launch');
@@ -77,13 +64,6 @@ function generateDebugConfigurations() {
                     if (foundConfig.name && config.name == foundConfig.name) {
                         createConfig = false;
 
-                        if (!foundConfig[currentSystem]) {
-                            foundConfig[currentSystem] = config[currentSystem];
-                            updatedConfigs++;
-                        } else {
-                            skippedConfigs++;
-                        }
-
                         return true; // break
                     }
                 });
@@ -91,6 +71,8 @@ function generateDebugConfigurations() {
                 if (createConfig) {
                     configurations.push(config);
                     updatedConfigs++;
+                } else {
+                    skippedConfigs++;
                 }
             });
 
@@ -99,7 +81,7 @@ function generateDebugConfigurations() {
             }
 
             if (skippedConfigs > 0) {
-                vscode.window.showInformationMessage(`Generate Debug Configurations skipped overwriting ${skippedConfigs} configurations`)
+                vscode.window.showInformationMessage(`Generate Debug Configurations skipped overwriting ${skippedConfigs} configurations`);
             }
  
         });

@@ -58,9 +58,9 @@
                     "type": "string",
                     "description": "Path to Unreal Engine root directory"
                 },
-                "ue4-cpptools.cppToolsConfiguration": {
+                "ue4-cpptools.configurationName": {
                     "type": "string",
-                    "description": "Name of CppTools configuration to generate"
+                    "description": "Name used for generated configurations"
                 },
                 "ue4-cpptools.recycleTerminal": {
                     "enum": [

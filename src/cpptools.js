@@ -127,16 +127,7 @@ function generateCppToolsConfiguration(configName) {
         let vscodePath = path.join(info.projectPath, '.vscode');
         let cppToolsPropertiesFile = path.join(vscodePath, 'c_cpp_properties.json');
 
-        let configurationName = info.cppToolsConfiguration;
-
-        if (!configurationName) {
-            let configurationMap = {
-                'win32' : 'Win32',
-                'linux' : 'Linux',
-                'darwin' : 'Mac'
-            }
-            configurationName = configurationMap[process.platform];
-        }
+        let configurationName = info.configurationName;
 
         let config = {
             'name' : configurationName,

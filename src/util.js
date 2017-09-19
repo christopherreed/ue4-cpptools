@@ -46,7 +46,15 @@ function getProjectInfo() {
 
         let engineRootPath = vscode.workspace.getConfiguration('ue4-cpptools').get('engineRootPath') || process.env.UE4_ENGINE_ROOT_PATH;
         
-        let cppToolsConfiguration = vscode.workspace.getConfiguration('ue4-cpptools').get('cppToolsConfiguration');
+        let configurationName = vscode.workspace.getConfiguration('ue4-cpptools').get('configurationName');
+        if (!configurationName) {
+            let configurationPlatforms = {
+                'win32' : 'Windows',
+                'linux' : 'Linux',
+                'darwin' : 'Mac'
+            }
+            configurationName = configurationPlatforms[process.platform];
+        }
 
         let overrideUnrealBuildTool = vscode.workspace.getConfiguration('ue4-cpptools').get('overrideUnrealBuildTool');
 
@@ -72,7 +80,7 @@ function getProjectInfo() {
             'projectFilePath' : projectFilePath,
             'engineRootPath' : engineRootPath,
 
-            'cppToolsConfiguration' : cppToolsConfiguration,
+            'configurationName' : configurationName,
 
             'overrideUnrealBuildTool' : overrideUnrealBuildTool,
 

@@ -11,7 +11,7 @@ function getGenerateProjectFilesTasks(info, currentSystem) {
         let args = buildtool.getGenerateProjectFilesArgs(info, true, false, true);
         buildtool.getBuildCommand(info, args).then((projectFilesCommand) => {
             tasks.push({
-                'taskName' : `Generate ${info.projectName} Project Files`,
+                'taskName' : `${info.configurationName} : Generate ${info.projectName} Project Files`,
                 'type' : 'process',
                 [currentSystem] : {
                     'command' : projectFilesCommand.command,
@@ -33,9 +33,9 @@ function getBuildTasks(info, buildConfiguration, buildConfigurationTarget, curre
     
         let args = buildtool.getBuildProjectArgs(info, buildConfiguration, buildConfigurationTarget)    
         buildtool.getBuildCommand(info, args).then((buildCommand) => {
-            let buildTaskName = `Build ${info.projectName} : ${buildConfiguration} ${buildConfigurationTarget}`;
-            let cleanTaskName = `Clean ${info.projectName} : ${buildConfiguration} ${buildConfigurationTarget}`;
-            let rebuildTaskName = `Rebuild ${info.projectName} : ${buildConfiguration} ${buildConfigurationTarget}`;
+            let buildTaskName = `${info.configurationName} : Build ${info.projectName} [${buildConfiguration} ${buildConfigurationTarget}]`;
+            let cleanTaskName = `${info.configurationName} : Clean ${info.projectName} [${buildConfiguration} ${buildConfigurationTarget}]`;
+            let rebuildTaskName = `${info.configurationName} : Rebuild ${info.projectName} [${buildConfiguration} ${buildConfigurationTarget}]`;
 
             tasks.push({
                 'taskName' : buildTaskName,
@@ -80,7 +80,7 @@ function getEditorTasks(info, currentSystem) {
         let args = [];
         editor.getEditorCommand(info, args).then((command) => {
             tasks.push({
-                'taskName' : 'Launch Unreal Editor',
+                'taskName' : `${info.configurationName} : Launch Unreal Editor`,
                 'type' : 'process',
                 [currentSystem] : {
                     'command' : command.command,
@@ -89,7 +89,7 @@ function getEditorTasks(info, currentSystem) {
             });
 
             tasks.push({
-                'taskName' : `Open ${info.projectName} With Editor [Development Editor]`,
+                'taskName' : `${info.configurationName} : Open ${info.projectName} With Editor [Development Editor]`,
                 'type' : 'process',
                 [currentSystem] : {
                     'command' : command.command,
@@ -98,7 +98,7 @@ function getEditorTasks(info, currentSystem) {
             });
 
             tasks.push({
-                'taskName' : `Open ${info.projectName} With Editor [DebugGame Editor]`,
+                'taskName' : `${info.configurationName} : Open ${info.projectName} With Editor [DebugGame Editor]`,
                 'type' : 'process',
                 [currentSystem] : {
                     'command' : command.command,
@@ -107,7 +107,7 @@ function getEditorTasks(info, currentSystem) {
             });
 
             tasks.push({
-                'taskName' : `Run ${info.projectName} With Editor [Development Editor]`,
+                'taskName' : `${info.configurationName} : Run ${info.projectName} With Editor [Development Editor]`,
                 'type' : 'process',
                 [currentSystem] : {
                     'command' : command.command,
@@ -116,7 +116,7 @@ function getEditorTasks(info, currentSystem) {
             });
 
             tasks.push({
-                'taskName' : `Run ${info.projectName} With Editor [DebugGame Editor]`,
+                'taskName' : `${info.configurationName} : Run ${info.projectName} With Editor [DebugGame Editor]`,
                 'type' : 'process',
                 [currentSystem] : {
                     'command' : command.command,
@@ -153,11 +153,11 @@ function generateTaskConfigurations() {
                 generatedTasksGlob.push(getBuildTasks(info, buildConfiguration, buildConfigurationTarget, currentSystem));
             });
         });
-
-        let skippedTasks = 0;
-        let updatedTasks = 0;
-
+        
         Promise.all(generatedTasksGlob).then((tasksArray) => {
+            let skippedTasks = 0;
+            let updatedTasks = 0;
+
             let tasksConfiguration = vscode.workspace.getConfiguration('tasks');
             
             if (!tasksConfiguration.get('version')) {
@@ -174,13 +174,6 @@ function generateTaskConfigurations() {
                         if (foundTask.taskName && task.taskName == foundTask.taskName) {
                             createTask = false;
                         
-                            if (!foundTask[currentSystem]) {
-                                foundTask[currentSystem] = task[currentSystem];
-                                updatedTasks++;
-                            } else {
-                                skippedTasks++;
-                            }
-
                             return true; // break
                         }
                     });
@@ -188,14 +181,19 @@ function generateTaskConfigurations() {
                     if (createTask) {
                         foundTasks.push(task);
                         updatedTasks++;
+                    } else {
+                        skippedTasks++;
                     }
-                });
-
-                if (updatedTasks > 0) {
-                    tasksConfiguration.update('tasks', foundTasks);
-                }
-
+                });   
             });
+
+            if (updatedTasks > 0) {
+                tasksConfiguration.update('tasks', foundTasks);
+            }
+
+            if (skippedTasks > 0) {
+                vscode.window.showInformationMessage(`Generate Task Configurations skipped overwriting ${skippedTasks} configurations`);
+            }
         }).catch((err) => {
            vscode.showErrorMessage(`Generate Build Configurations Failed : ${err}`); 
         });
