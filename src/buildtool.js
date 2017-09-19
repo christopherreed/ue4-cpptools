@@ -45,42 +45,41 @@ function getBuildCommand(info, args) {
         }
     });
 }
+exports.getBuildCommand = getBuildCommand;
 
-function runBuildTool(info, args, taskName) {
-    getBuildCommand(info, args).then((command) => {
-        terminal.runCommandInTerminal(command.command, command.args, taskName);
-    }, (err) => {
-        vscode.window.showErrorMessage(`${err}`);
-    });
-}
+function getBuildProjectArgs(info, buildConfiguration, buildConfigurationTarget, buildPlatform) {
+    if (!buildPlatform) {
+        let buildPlatforms = {
+            'linux' : 'Linux',
+            'win32' : 'Win64',
+            'darwin' : 'Mac'
+        };
+        buildPlatform = buildPlatforms[process.platform];
+    }
 
-function buildProjectArgs(info) {
-    let buildConfigurationTarget = info.buildConfigurationTarget;
-    if (!buildConfigurationTarget || buildConfigurationTarget == 'Game') {
+    if(!buildConfiguration) {
+        buildConfiguration = 'Development';
+    }
+
+    if (!buildConfigurationTarget) {
+        buildConfigurationTarget = 'Editor';
+    } else if (buildConfigurationTarget == 'Game') { // For forcing the 'empty' stand-alone target
         buildConfigurationTarget = '';
     }
     
     let args = [
         info.projectName + buildConfigurationTarget,
-        info.buildPlatform,
-        info.buildConfiguration,
-        info.projectFilePath
+        buildPlatform,
+        buildConfiguration,
+        info.projectFilePath,
+        '-waitmutex'
     ];
 
     return args;
 }
+exports.getBuildProjectArgs = getBuildProjectArgs;
 
-function buildProject() {
-    util.getProjectInfo().then((info) => {
-        let args = buildProjectArgs(info);
-        
-        runBuildTool(info, args, 'ue4-cpptools:BuildProject');
-        util.showIndicator(`Build Project : ${info.buildPlatform} ${info.buildConfiguration} ${info.buildConfigurationTarget}`)
-    });
-}
-exports.buildProject = buildProject;
-
-function generateProjectFilesArgs(info, generateNativeProjectFiles=true, generateCodeLiteProjectFiles=false, generateEngineProjectFiles=true) {
+function getGenerateProjectFilesArgs(info, generateNativeProjectFiles=true, generateCodeLiteProjectFiles=false, generateEngineProjectFiles=true) {
     let args = [];
 
     if (generateNativeProjectFiles) {
@@ -101,7 +100,8 @@ function generateProjectFilesArgs(info, generateNativeProjectFiles=true, generat
         '-project=',
         info.projectFilePath,
         '-game',
-        '-rocket'
+        '-rocket',
+        '-waitmutex'
     ]);
 
     if (generateEngineProjectFiles) {
@@ -110,21 +110,12 @@ function generateProjectFilesArgs(info, generateNativeProjectFiles=true, generat
 
     return args;
 }
-
-function generateProjectFiles() {
-    util.getProjectInfo().then((info) => {
-        let args = generateProjectFilesArgs(info, true);
-        
-        runBuildTool(info, args, 'ue4-cpptools:GenerateProjectFiles');
-        util.showIndicator('Generate Project Files');
-    });
-}
-exports.generateProjectFiles = generateProjectFiles;
+exports.getGenerateProjectFilesArgs = getGenerateProjectFilesArgs;
 
 function execGenerateProjectFilesProcess(generateNativeProjectFiles=false, generateCodeLiteProjectFiles=false, generateEngineProjectFiles=false) {
     return new Promise((resolve, reject) => {
         util.getProjectInfo().then((info) => {
-            let args = generateProjectFilesArgs(info, generateNativeProjectFiles, generateCodeLiteProjectFiles, generateEngineProjectFiles);
+            let args = getGenerateProjectFilesArgs(info, generateNativeProjectFiles, generateCodeLiteProjectFiles, generateEngineProjectFiles);
             
             getBuildCommand(info, args).then((command) => {
                 terminal.execCommandInProcess(command.command, command.args).then(
@@ -140,39 +131,3 @@ function execGenerateProjectFilesProcess(generateNativeProjectFiles=false, gener
     });
 }
 exports.execGenerateProjectFilesProcess = execGenerateProjectFilesProcess;
-
-function cleanProject() {
-    util.getProjectInfo().then((info) => {
-        let args = buildProjectArgs(info);
-        args.push('-clean');
-
-        runBuildTool(info, args, 'ue4-cpptools:BuildProject');
-        util.showIndicator(`Clean Project : ${info.buildPlatform} ${info.buildConfiguration} ${info.buildConfigurationTarget}`);
-    });
-}
-exports.cleanProject = cleanProject;
-
-function rebuildProject() {
-    util.getProjectInfo().then((info) => {
-        let args = buildProjectArgs(info);
-        args.push('-clean');
-
-        getBuildCommand(info, args).then((command) => {
-            return vscode.window.withProgress({'title':`Clean Project : ${info.buildPlatform} ${info.buildConfiguration} ${info.buildConfigurationTarget}`, 'location':vscode.ProgressLocation.Window}, (progress) => {
-                return new Promise((resolve, reject) => {
-                    terminal.execCommandInProcess(command.command, command.args).then(
-                    (ok) => {
-                        resolve();
-                    },(err) => {
-                        reject(`Failed to clean project : Exited with error code ${err}`);
-                    });
-                });
-            });
-        }).then(_ => {
-            buildProject();
-        }).catch((err) => {
-            reject(err);
-        });
-    });  
-}
-exports.rebuildProject = rebuildProject;
