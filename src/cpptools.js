@@ -83,7 +83,6 @@ function writeCppToolsPropertiesFile(cppToolsPropertiesFile, config) {
             let configurations = json.configurations || [];
 
             if (Array.isArray(configurations)) {
-                let preventConfigOverwrite = true; // TODO setting
                 let foundConfig = -1;
 
                 for (i in configurations) {
@@ -93,27 +92,23 @@ function writeCppToolsPropertiesFile(cppToolsPropertiesFile, config) {
                     }
                 }
                 
-                if (preventConfigOverwrite && foundConfig > -1) {
-                    reject(`Skipped overwrite of configuration '${config.name}'`);
-                    return;
-                }
-
-                if (foundConfig < 0) {
-                    configurations.push(config);
+                if (foundConfig > -1) {
+                    vscode.window.showInformationMessage(`Skipped overwrite of configuration '${config.name}'`);
+                    resolve();
                 } else {
-                    configurations[foundConfig] = config;
+                    configurations.push(config);
+                
+                    json.configurations = configurations;
+                    json.version = json.version || 3;
+
+                    fs.writeFile(cppToolsPropertiesFile, JSON.stringify(json, null, '\t'), {'flag':'w+'}, (err) => {
+                        if (err) {
+                            reject(`Failed to write configuration file '${cppToolsPropertiesFile}' : ${err.code}`);
+                        } else {
+                            resolve();
+                        }
+                    });
                 }
-
-                json.configurations = configurations;
-                json.version = json.version || 2;
-
-                fs.writeFile(cppToolsPropertiesFile, JSON.stringify(json), {'flag':'w+'}, (err) => {
-                    if (err) {
-                        reject(`Failed to write configuration file '${cppToolsPropertiesFile}' : ${err.code}`);
-                    } else {
-                        resolve(`Updated configuration file '${cppToolsPropertiesFile}'`);
-                    }
-                });
             } else {
                 reject('Invalid configuration file data');
             }
