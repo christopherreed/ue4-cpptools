@@ -123,19 +123,58 @@ function writeCppToolsPropertiesFile(cppToolsPropertiesFile, config) {
             let configurations = json.configurations || [];
 
             if (Array.isArray(configurations)) {
-                let foundConfig = -1;
+                let cppToolsDefaultConfigNames = {
+                    'linux' : 'Linux',
+                    'win32' : 'Win32',
+                    'darwin' : 'Mac'
+                };
+                let defaultConfigName = cppToolsDefaultConfigNames[process.platform];
 
-                for (i in configurations) {
-                    if (configurations[i].name == config.name) {
-                        foundConfig = i;
-                        break;
+                let foundConfig;
+                let foundDefaultConfig;
+
+                configurations.forEach((cfg) => {
+                    if (cfg.name && cfg.name == config.name) {
+                        foundConfig = cfg;
                     }
-                }
+
+                    if (cfg.name && cfg.name == defaultConfigName) {
+                        foundDefaultConfig = cfg;
+                    }
+                });
                 
-                if (foundConfig > -1) {
+                if (foundConfig) {
                     vscode.window.showInformationMessage(`Skipped overwrite of configuration '${config.name}'`);
                     resolve();
                 } else {
+                    // Append system default config values if present; also from clang -v 
+                    if (foundDefaultConfig) {        
+                        if (foundDefaultConfig.includePath) {
+                            foundDefaultConfig.includePath.forEach((val) => {
+                                if (config.includePath.indexOf(val) < 0) {
+                                    config.includePath.push(val);
+                                }
+                            });
+                        }
+
+                        if (foundDefaultConfig.defines) {
+                            foundDefaultConfig.defines.forEach((val) => {
+                                if (config.defines.indexOf(val) < 0) {
+                                    config.defines.push(val);
+                                }
+                            });
+                        }
+                        
+                       
+                        if (foundDefaultConfig.browse && foundDefaultConfig.browse.path) {
+                           foundDefaultConfig.browse.path.forEach((val) => {
+                               if (config.browse.path.indexOf(val) < 0) {
+                                   config.browse.path.push(val);
+                               }
+                           });
+                        }
+                    }
+
                     configurations.push(config);
                 
                     json.configurations = configurations;
@@ -166,7 +205,7 @@ function generateCppToolsConfiguration(configName) {
 
         let config = {
             'name' : configurationName,
-            'includePath' : [],
+            'includePath' : ['${workspaceRoot}'],
             'defines' : [],
             'browse' : {}
         };
@@ -178,7 +217,7 @@ function generateCppToolsConfiguration(configName) {
 
             .then(_ => generateCppToolsIncludePathFromCodeLiteProject(info))
             .then((includePath) => {
-                config.includePath = includePath;
+                config.includePath = config.includePath.concat(includePath);
             })
 
             .then(_ => generateIntermediateIncludePaths(info))
