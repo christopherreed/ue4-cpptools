@@ -68,7 +68,6 @@
                 },
                 "ue4-cpptools.buildConfigurations": {
                     "type" : "array",
-                    
                     "description" : "Unreal Build Tool build configurations to generate tasks for"
                 },
                 "ue4-cpptools.buildConfigurationTargets": {
