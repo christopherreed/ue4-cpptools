@@ -49,9 +49,9 @@ function getProjectInfo() {
         let configurationName = vscode.workspace.getConfiguration('ue4-cpptools').get('configurationName');
         if (!configurationName) {
             let configurationPlatforms = {
-                'win32' : 'Windows',
-                'linux' : 'Linux',
-                'darwin' : 'Mac'
+                'win32' : 'UE4-Windows',
+                'linux' : 'UE4-Linux',
+                'darwin' : 'UE4-Mac'
             }
             configurationName = configurationPlatforms[process.platform];
         }
