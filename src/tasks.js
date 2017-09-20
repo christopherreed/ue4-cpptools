@@ -3,7 +3,7 @@ const util = require('./util.js');
 const buildtool = require('./buildtool.js');
 const editor = require('./editor.js');
 
-function getGenerateProjectFilesTasks(info, currentSystem) {
+function getGenerateProjectFilesTasks(info) {
     return new Promise((resolve, reject) => {
         // Generate project files tasks
         let tasks = [];
@@ -13,10 +13,8 @@ function getGenerateProjectFilesTasks(info, currentSystem) {
             tasks.push({
                 'taskName' : `${info.configurationName} : Generate ${info.projectName} Project Files`,
                 'type' : 'process',
-                [currentSystem] : {
-                    'command' : projectFilesCommand.command,
-                    'args' : projectFilesCommand.args
-                }
+                'command' : projectFilesCommand.command,
+                'args' : projectFilesCommand.args
             });
 
             resolve(tasks);
@@ -26,12 +24,12 @@ function getGenerateProjectFilesTasks(info, currentSystem) {
     });
 }
 
-function getBuildTasks(info, buildConfiguration, buildConfigurationTarget, currentSystem) {
+function getBuildTasks(info, buildConfiguration, buildConfigurationTarget, buildPlatform) {
     return new Promise((resolve, reject) => {
         // Build, clean, and rebuild tasks for the build configuration matrix
         let tasks = [];
     
-        let args = buildtool.getBuildProjectArgs(info, buildConfiguration, buildConfigurationTarget)    
+        let args = buildtool.getBuildProjectArgs(info, buildConfiguration, buildConfigurationTarget, buildPlatform)    
         buildtool.getBuildCommand(info, args).then((buildCommand) => {
             let buildTaskName = `${info.configurationName} : Build ${info.projectName} [${buildConfiguration} ${buildConfigurationTarget}]`;
             let cleanTaskName = `${info.configurationName} : Clean ${info.projectName} [${buildConfiguration} ${buildConfigurationTarget}]`;
@@ -41,20 +39,16 @@ function getBuildTasks(info, buildConfiguration, buildConfigurationTarget, curre
                 'taskName' : buildTaskName,
                 'type' : 'process',
                 'group' : 'build',
-                [currentSystem] : {
-                    'command' : buildCommand.command,
-                    'args' : buildCommand.args
-                }
+                'command' : buildCommand.command,
+                'args' : buildCommand.args
             });
 
             tasks.push({
                 'taskName' : cleanTaskName,
                 'type' : 'process',
                 'group' : 'build',
-                [currentSystem] : {
-                    'command' : buildCommand.command,
-                    'args' : buildCommand.args.concat(['-clean'])
-                }
+                'command' : buildCommand.command,
+                'args' : buildCommand.args.concat(['-clean'])
             });
 
             tasks.push({
@@ -73,7 +67,7 @@ function getBuildTasks(info, buildConfiguration, buildConfigurationTarget, curre
     });
 }
 
-function getEditorTasks(info, currentSystem) {
+function getEditorTasks(info) {
     return new Promise((resolve, reject) => {
         // Launch, open, and run tasks
         let tasks = [];
@@ -82,46 +76,36 @@ function getEditorTasks(info, currentSystem) {
             tasks.push({
                 'taskName' : `${info.configurationName} : Launch Unreal Editor`,
                 'type' : 'process',
-                [currentSystem] : {
-                    'command' : command.command,
-                    'args' : command.args
-                }
+                'command' : command.command,
+                'args' : command.args
             });
 
             tasks.push({
                 'taskName' : `${info.configurationName} : Open ${info.projectName} With Editor [Development Editor]`,
                 'type' : 'process',
-                [currentSystem] : {
-                    'command' : command.command,
-                    'args' : command.args.concat(info.projectFilePath)
-                }
+                'command' : command.command,
+                'args' : command.args.concat(info.projectFilePath)
             });
 
             tasks.push({
                 'taskName' : `${info.configurationName} : Open ${info.projectName} With Editor [DebugGame Editor]`,
                 'type' : 'process',
-                [currentSystem] : {
-                    'command' : command.command,
-                    'args' : command.args.concat([info.projectFilePath, '-debug'])
-                }
+                'command' : command.command,
+                'args' : command.args.concat([info.projectFilePath, '-debug'])
             });
 
             tasks.push({
                 'taskName' : `${info.configurationName} : Run ${info.projectName} With Editor [Development Editor]`,
                 'type' : 'process',
-                [currentSystem] : {
-                    'command' : command.command,
-                    'args' : command.args.concat([info.projectFilePath, '-game'])
-                }
+                'command' : command.command,
+                'args' : command.args.concat([info.projectFilePath, '-game'])
             });
 
             tasks.push({
                 'taskName' : `${info.configurationName} : Run ${info.projectName} With Editor [DebugGame Editor]`,
                 'type' : 'process',
-                [currentSystem] : {
-                    'command' : command.command,
-                    'args' : command.args.concat([info.projectFilePath, '-game', '-debug'])
-                }
+                'command' : command.command,
+                'args' : command.args.concat([info.projectFilePath, '-game', '-debug'])
             });
 
             resolve(tasks);
@@ -132,25 +116,19 @@ function getEditorTasks(info, currentSystem) {
 }
 
 function generateTaskConfigurations() {
-    let systemLiterals = {
-        'linux' : 'linux',
-        'win32' : 'windows',
-        'darwin' : 'osx'
-    };
-    let currentSystem = systemLiterals[process.platform];
-
     util.getProjectInfo().then((info) => {
         let generatedTasksGlob = [];
 
-        generatedTasksGlob.push(getGenerateProjectFilesTasks(info, currentSystem));
-        generatedTasksGlob.push(getEditorTasks(info, currentSystem));
+        generatedTasksGlob.push(getGenerateProjectFilesTasks(info));
+        generatedTasksGlob.push(getEditorTasks(info));
 
-        let buildConfigurations = ['Development', 'DebugGame'];
-        let buildConfigurationTargets = ['Editor', 'Game'];
-        
+        let buildConfigurations = info.buildConfigurations;
+        let buildConfigurationTargets = info.buildConfigurationTargets;
+        let buildPlatform = info.buildPlatform;
+
         buildConfigurations.forEach((buildConfiguration) => {
             buildConfigurationTargets.forEach((buildConfigurationTarget) => {
-                generatedTasksGlob.push(getBuildTasks(info, buildConfiguration, buildConfigurationTarget, currentSystem));
+                generatedTasksGlob.push(getBuildTasks(info, buildConfiguration, buildConfigurationTarget, buildPlatform));
             });
         });
         
