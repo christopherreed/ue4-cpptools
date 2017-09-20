@@ -18,8 +18,6 @@ Features
 
 This extension is intended to supply some tools to make it easier to use VSCode as your IDE to edit C++ code for an Unreal Engine 4 project. Currently you can use it to generate a [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) IntelliSense configuration for your UE4 project. You can also build your project. This extension can open your project in the Unreal Editor and run uncooked builds of your project. There is also a command to search the Unreal Engine 4 online documenation.
 
-Most commands are run in a integrated terminal [shell](https://code.visualstudio.com/docs/editor/integrated-terminal#_configuration) so that the raw output is available. You can configure the [environment](https://code.visualstudio.com/updates/v1_15#_configure-environment-of-terminal-sessions) commands are run in.
-
 This extension should work on Windows, Linux, and Mac (untested).
 
 Install
@@ -34,28 +32,16 @@ Install
 Usage
 -----
 
-Use the command palette to run commands. [[?]](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette)
+Use the command palette to run commands and tasks. [[?]](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette)
 
 Commands
 --------
 
-__UE4 CppTools - Generate CppTools Configuration__ : Generate [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) configuration for your project. The configuration name can be specified with the *cppToolsConfiguration* setting.
+__UE4 CppTools - Generate CppTools Configuration__ : Generate [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) configuration for your project. The configuration name can be specified with the *configurationName* setting.
 
-__UE4 CppTools - Generate Project Files__ : Generate native project files for your project. [[?]](https://docs.unrealengine.com/latest/INT/Programming/UnrealBuildSystem/ProjectFileGenerator/index.html)
+__UE4 CppTools - Generate Task Configurations__ : Generate task configurations for your project. [[?]](https://code.visualstudio.com/docs/editor/tasks) The configuration name can be specified with the *configurationName* setting.
 
-__UE4 CppTools - Open Terminal__ : Open the *ue4-cpptools* terminal.
-
-__UE4 CppTools - Build Project__ : Build project. The build configuration matrix can be specified with the *buildConfiguration*, *buildConfigurationTarget*, and *buildPlatform* settings.
-
->__NOTE__: This command will only *build* your project; it won't do asset cooking, packaging, or anything else that might be required for your particular build configuration.
-
-__UE4 CppTools - Clean Project__ : Clean project.
-
-__UE4 CppTools - Rebuild Project__ : Clean and build project.
-
-__UE4 CppTools - Open Project With Unreal Editor__ : Open project with Unreal Editor.
-
-__UE4 CppTools - Run Project With Unreal Editor__ : Run an uncooked project build with Unreal Editor.
+__UE4 CppTools - Generate Debug Configurations__ : Generate [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) debug configurations  for your project. [[?]](https://github.com/Microsoft/vscode-cpptools/blob/master/launch.md) The configuration name can be specified with the *configurationName* setting.
 
 __UE4 CppTools - Search Unreal Engine Online Documentation__ : Search Unreal Engine 4 online documentation.
 
@@ -66,17 +52,15 @@ __ue4-cpptools.engineRootPath__ : Path to Unreal Engine 4 root directory (*...\E
 
 > __NOTE__: *engineRootPath* setting is required for many commands to work.
 
-__ue4-cpptools.cppToolsConfiguration__ : Name of CppTools configuration to generate.
-
-__ue4-cpptools.recycleTerminal__ : Controls terminal reuse for the extension.
+__ue4-cpptools.configurationName__ : Name used for generated configurations.
 
 ## Advanced Settings (you probably shouldn't touch these)
 
-__ue4-cpptools.buildConfiguration__ : Unreal Build Tool build configuration. [[?]](https://docs.unrealengine.com/latest/INT/Programming/Development/CompilingProjects/index.html)
+__ue4-cpptools.buildConfigurations__ : Unreal Build Tool build configurations to generate tasks for. [[?]](https://docs.unrealengine.com/latest/INT/Programming/Development/CompilingProjects/index.html)
 
-__ue4-cpptools.buildConfigurationTarget__ : Unreal Build Tool build configuration target. [[?]](https://docs.unrealengine.com/latest/INT/Programming/Development/CompilingProjects/index.html)
+__ue4-cpptools.buildConfigurationTargets__ : Unreal Build Tool build configuration targets to generate tasks for. [[?]](https://docs.unrealengine.com/latest/INT/Programming/Development/CompilingProjects/index.html)
 
-__ue4-cpptools.buildPlatform__ : Unreal Build Tool build platform. [[?]](https://docs.unrealengine.com/latest/INT/Programming/Development/CompilingProjects/index.html)
+__ue4-cpptools.buildPlatform__ : Unreal Build Tool build platform to generate tasks for. [[?]](https://docs.unrealengine.com/latest/INT/Programming/Development/CompilingProjects/index.html)
 
 __ue4-cpptools.overrideUnrealBuildTool__ : Override the command to run Unreal Build Tool.
 
