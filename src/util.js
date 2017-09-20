@@ -58,9 +58,9 @@ function getProjectInfo() {
 
         let overrideUnrealBuildTool = vscode.workspace.getConfiguration('ue4-cpptools').get('overrideUnrealBuildTool');
 
-        let buildConfiguration = vscode.workspace.getConfiguration('ue4-cpptools').get('buildConfiguration') || 'Development';
+        let buildConfigurations = vscode.workspace.getConfiguration('ue4-cpptools').get('buildConfigurations') || ['DebugGame', 'Development'];
         
-        let buildConfigurationTarget = vscode.workspace.getConfiguration('ue4-cpptools').get('buildConfigurationTarget') || 'Editor';
+        let buildConfigurationTargets = vscode.workspace.getConfiguration('ue4-cpptools').get('buildConfigurationTargets') || ['Editor', 'Game'];
 
         let buildPlatform = vscode.workspace.getConfiguration('ue4-cpptools').get('buildPlatform');
         if (!buildPlatform) {
@@ -84,9 +84,9 @@ function getProjectInfo() {
 
             'overrideUnrealBuildTool' : overrideUnrealBuildTool,
 
-            'buildConfiguration' : buildConfiguration,
+            'buildConfigurations' : buildConfigurations,
 
-            'buildConfigurationTarget' : buildConfigurationTarget,
+            'buildConfigurationTargets' : buildConfigurationTargets,
 
             'buildPlatform' : buildPlatform,
 

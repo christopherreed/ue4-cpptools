@@ -66,24 +66,14 @@
                     "type": "string",
                     "description": "Override the command to run Unreal Build Tool"
                 },
-                "ue4-cpptools.buildConfiguration": {
-                    "enum": [
-                        "Development",
-                        "DebugGame",
-                        "Debug",
-                        "Shipping",
-                        "Test"
-                    ],
-                    "description" : "Unreal Build Tool build configuration"
+                "ue4-cpptools.buildConfigurations": {
+                    "type" : "array",
+                    
+                    "description" : "Unreal Build Tool build configurations to generate tasks for"
                 },
-                "ue4-cpptools.buildConfigurationTarget": {
-                    "enum": [
-                        "Editor",
-                        "Game",
-                        "Client",
-                        "Server"
-                    ],
-                    "description" : "Unreal Build Tool build configuration target"
+                "ue4-cpptools.buildConfigurationTargets": {
+                    "type": "array",
+                    "description" : "Unreal Build Tool build configuration targets to generate tasks for"
                 },
                 "ue4-cpptools.buildPlatform": {
                     "enum": [
@@ -91,7 +81,7 @@
                         "Win64",
                         "Mac"
                     ],
-                    "description" : "Unreal Build Tool build platform"
+                    "description" : "Unreal Build Tool build platform to generate tasks for"
                 },
                 "ue4-cpptools.overrideUnrealEditor": {
                     "type": "string",
