@@ -61,10 +61,10 @@ function getBuildProjectArgs(info, buildConfiguration, buildConfigurationTarget,
         buildConfiguration = 'Development';
     }
 
-    if (!buildConfigurationTarget) {
+    if (buildConfigurationTarget == 'Game' || buildConfigurationTarget == 'Executable') {
+        buildConfigurationTarget = ''; // For forcing the 'empty' stand-alone game executable target
+    } else if (!buildConfigurationTarget) {
         buildConfigurationTarget = 'Editor';
-    } else if (buildConfigurationTarget == 'Game') { // For forcing the 'empty' stand-alone target
-        buildConfigurationTarget = '';
     }
     
     let args = [
