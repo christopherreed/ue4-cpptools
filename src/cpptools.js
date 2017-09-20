@@ -66,6 +66,46 @@ function generateCppToolsBrowse(info) {
     });
 }
 
+function findSubDirsSync(rootPath, dir, results) {
+    let files = [];
+    try {
+        files = fs.readdirSync(rootPath);
+    } catch (err) {
+        if (err.code != 'ENOENT') {
+            throw(err);
+        }
+    }
+
+    files.forEach((file) => {
+        let fullPath = path.join(rootPath, file);
+
+        let stat = fs.statSync(fullPath);
+        if (stat.isDirectory()) {
+            if (dir == '*') {
+                results.push(fullPath);
+            } else if (dir == file) {
+                findSubDirsSync(fullPath, '*', results);
+            } else {
+                findSubDirsSync(fullPath, dir, results);
+            }
+        }
+    });
+}
+
+function generateIntermediateIncludePaths(info) {
+    let intermediatePath = path.join(info.projectPath, 'Intermediate', 'Build', info.buildPlatform);
+    
+    return new Promise((resolve, reject) => {
+        let foundIncPaths = [];
+        try {
+            findSubDirsSync(intermediatePath, 'Inc', foundIncPaths);
+            resolve(foundIncPaths);
+        } catch (err) {
+            reject(err);
+        }
+    });
+}
+
 function writeCppToolsPropertiesFile(cppToolsPropertiesFile, config) {
     return new Promise((resolve, reject) => {
         let json = {};
@@ -137,21 +177,31 @@ function generateCppToolsConfiguration(configName) {
             .then(_ => buildtool.execGenerateProjectFilesProcess(false, true, true))
 
             .then(_ => generateCppToolsIncludePathFromCodeLiteProject(info))
-            .then((includePath) => {config.includePath = includePath;})
+            .then((includePath) => {
+                config.includePath = includePath;
+            })
+
+            .then(_ => generateIntermediateIncludePaths(info))
+            .then((intermediateIncludePaths) => {
+                config.includePath = config.includePath.concat(intermediateIncludePaths);
+            })
 
             .then(_ => generateCppToolsDefinesFromCodeLiteProject(info))
-            .then((defines) => {config.defines = defines;})
+            .then((defines) => {
+                config.defines = defines;
+            })
             
             .then(_ => generateCppToolsBrowse(info))
-            .then((browse) => {config.browse = browse;})
+            .then((browse) => {
+                config.browse = browse;
+            })
 
             .then(_ => writeCppToolsPropertiesFile(cppToolsPropertiesFile, config))
 
-            .then(
-                (ok) => {}, 
-                (err) => {vscode.window.showErrorMessage(`Failed to generate configuration : ${err}`);}
-            )}
-        );
+            .catch((err) => {
+                vscode.window.showErrorMessage(`Failed to generate configuration : ${err}`);
+            })
+        });
     });   
     
 }
