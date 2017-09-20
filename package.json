@@ -62,14 +62,6 @@
                     "type": "string",
                     "description": "Name used for generated configurations"
                 },
-                "ue4-cpptools.recycleTerminal": {
-                    "enum": [
-                        "Always",
-                        "Command",
-                        "Never"
-                    ],
-                    "description": "Controls terminal reuse for the extension"
-                },
                 "ue4-cpptools.overrideUnrealBuildTool": {
                     "type": "string",
                     "description": "Override the command to run Unreal Build Tool"
