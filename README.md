@@ -28,6 +28,7 @@ Install
 Edit your project
 ----
 Setup:
+
 1) Install [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) extension. This provides support for c++ language and IntelliSense.
 
 2) Run **Generate CppTools Configuration**. This will generate [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) configuration for your project. [[?]](https://code.visualstudio.com/docs/languages/cpp)
@@ -45,6 +46,7 @@ Task **Launch Unreal Editor** : Launch Unreal Editor
 Build your project
 -----
 Setup:
+
 1) Run **Generate Task Configurations**. This will generate build tasks for your project. [[?]](https://docs.unrealengine.com/latest/INT/Programming/Development/CompilingProjects/index.html)
 
 > The generated build task configurations matrix is determined by the settings **buildConfigurations** and **buildConfigurationTargets** 
@@ -64,6 +66,7 @@ Task **Rebuild *Project* [*buildConfigurations* *buildConfigurationTargets*]** C
 Debug your project
 -----
 Setup:
+
 1) Install [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) extension. This provides support for c++ debuggers. [[?]](https://code.visualstudio.com/docs/languages/cpp#_debugging)
 
 2) Run **Generate Debug Configurations**. This will generate [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) launch configurations for your project.
