@@ -1,54 +1,37 @@
 Change Log
 ==========
-
-v0.0.5
+v0.1.0
 ------
 
-Implemented Clean Project command
+Added Generate Debug Configurations command. Running the command will update launch.json with debug configurations: 
+* *configurationName* : Attach Editor *Project* [GameDebug Editor]
+* *configurationName* : Launch Editor *Project* [GameDebug Editor]
+* *configurationName* : Launch *Project* [GameDebug Editor]
 
-Implemented Rebuild Project command
+Added Generate Task Configurations command. Running the command will update tasks.json with task configurations:
+* *configurationName* : Generate *Project* Project Files
+* *configurationName* : Open *Project* With Editor
+* *configurationName* : Run *Project* With Editor
+* *configurationName* : Launch Unreal Editor
+* *configurationName* : Build *Project* [*buildConfigurations* *buildConfigurationTargets*]
+* *configurationName* : Clean *Project* [*buildConfigurations* *buildConfigurationTargets*]
+* *configurationName* : Rebuild *Project* [*buildConfigurations* *buildConfigurationTargets*]
 
-Removed HotReload command
+Added settings:
+* *configurationName* - name for task, debug, and cppTools configurations
+* *buildConfigurations* - build configurations to generate task configurations for
+* *buildConfigurationTargets* - build configuration targets to generate task configurations for
 
-Added working indicator for commands
+Removed settings:
+* *buildConfiguration* - use *buildConfigurations*
+* *buildConfigurationTarget* - use *buildConfigurationTargets*
+* *cppToolsConfiguration* - use *configuratinName*
+* *recycleTerminal* - removed terminal related stuff
+* *buildPlatform* - current platform only
 
-Changed Run Project With Unreal Editor to prompt for build configuration
+Other:
+* Removed terminal related stuff
+* Bumped minimum vscode version to 1.15
+* Added intermediate include paths to generated cppTool configuration
+* Added default system configuration to generated cppTool configuration
 
-Changed Open Project With Unreal Editor to prompt for build configuration
-
-v0.0.4
-------
-
-Implemented Open Project With Editor command
-
-Implemented Run Project With Editor command
-
-Added setting overrideUnrealEditor
-
-Implemented Search Online Documentation command
-
-Fixed build commands on Mac - untested
-
-Added Debug buildConfiguration
-
-Fixed HotReload command for DebugGame buildConfiguration
-
-v0.0.3
-------
-
-Renamed setting configurationName to cppToolsConfiguration
-
-Fixed Generate Project Files command on Windows
-
-Fixed Generate CppTools Configuration command will now generate the required CodeLite project files automatically
-
-Changed Generate Project Files command will now only generate native project files
-
-Implemented full build configuration matrix
-
-Added Open Terminal command
-
-v0.0.2
-------
-
-Added check for UnrealBuildTool.exe and some more error reporting
