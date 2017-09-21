@@ -64,7 +64,7 @@
                 },
                 "ue4-cpptools.overrideUnrealBuildTool": {
                     "type": "string",
-                    "description": "Override the command to run Unreal Build Tool"
+                    "description": "Advanced - Override the command to run Unreal Build Tool"
                 },
                 "ue4-cpptools.buildConfigurations": {
                     "type" : "array",
@@ -76,7 +76,7 @@
                 },
                 "ue4-cpptools.overrideUnrealEditor": {
                     "type": "string",
-                    "description": "Override the command to run Unreal Editor"
+                    "description": "Advanced - Override the command to run Unreal Editor"
                 }
             }
         }
