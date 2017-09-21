@@ -49,12 +49,7 @@ exports.getBuildCommand = getBuildCommand;
 
 function getBuildProjectArgs(info, buildConfiguration, buildConfigurationTarget, buildPlatform) {
     if (!buildPlatform) {
-        let buildPlatforms = {
-            'linux' : 'Linux',
-            'win32' : 'Win64',
-            'darwin' : 'Mac'
-        };
-        buildPlatform = buildPlatforms[process.platform];
+        buildPlatform = info.buildPlatform;
     }
 
     if(!buildConfiguration) {

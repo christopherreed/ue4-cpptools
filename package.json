@@ -74,14 +74,6 @@
                     "type": "array",
                     "description" : "Unreal Build Tool build configuration targets to generate tasks for"
                 },
-                "ue4-cpptools.buildPlatform": {
-                    "enum": [
-                        "Linux",
-                        "Win64",
-                        "Mac"
-                    ],
-                    "description" : "Unreal Build Tool build platform to generate tasks for"
-                },
                 "ue4-cpptools.overrideUnrealEditor": {
                     "type": "string",
                     "description": "Override the command to run Unreal Editor"

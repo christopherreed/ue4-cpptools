@@ -60,8 +60,6 @@ __ue4-cpptools.buildConfigurations__ : Unreal Build Tool build configurations to
 
 __ue4-cpptools.buildConfigurationTargets__ : Unreal Build Tool build configuration targets to generate tasks for. [[?]](https://docs.unrealengine.com/latest/INT/Programming/Development/CompilingProjects/index.html)
 
-__ue4-cpptools.buildPlatform__ : Unreal Build Tool build platform to generate tasks for. [[?]](https://docs.unrealengine.com/latest/INT/Programming/Development/CompilingProjects/index.html)
-
 __ue4-cpptools.overrideUnrealBuildTool__ : Override the command to run Unreal Build Tool.
 
 __ue4-cpptools.overrideUnrealEditor__ : Override the command to run Unreal Editor.

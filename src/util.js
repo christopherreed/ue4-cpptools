@@ -73,15 +73,12 @@ function getProjectInfo() {
             ];
         }
 
-        let buildPlatform = vscode.workspace.getConfiguration('ue4-cpptools').get('buildPlatform');
-        if (!buildPlatform) {
-            let buildPlatforms = {
-                'linux' : 'Linux',
-                'win32' : 'Win64',
-                'darwin' : 'Mac'
-            };
-            buildPlatform = buildPlatforms[process.platform]; 
-        }
+        let buildPlatforms = {
+            'linux' : 'Linux',
+            'win32' : 'Win64',
+            'darwin' : 'Mac'
+        };
+        let buildPlatform = buildPlatforms[process.platform]; 
         
         let overrideUnrealEditor = vscode.workspace.getConfiguration('ue4-cpptools').get('overrideUnrealEditor');
 
