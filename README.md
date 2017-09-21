@@ -57,7 +57,7 @@ Task **Generate *Project* Project Files** : Generate project files for your proj
 
 Task **Build *Project* [*buildConfigurations* *buildConfigurationTargets*]** Build your project.
 
-Task **Clean *Project* [*buildConfigurations* *buildConfigurationTargets*]** Build your project.
+Task **Clean *Project* [*buildConfigurations* *buildConfigurationTargets*]** Clean your project.
 
 Task **Rebuild *Project* [*buildConfigurations* *buildConfigurationTargets*]** Clean and build your project.
 
