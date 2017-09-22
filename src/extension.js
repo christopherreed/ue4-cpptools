@@ -14,8 +14,6 @@ function activate(context) {
     context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.generateTaskConfigurations', tasks.generateTaskConfigurations));
     context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.searchOnlineDocumentation', misc.searchOnlineDocumentation));
     context.subscriptions.push(vscode.commands.registerCommand('ue4-cpptools.generateDebugConfigurations', debug.generateDebugConfigurations));
-
-    context.subscriptions.push(vscode.window.onDidCloseTerminal(term => {terminal.removeTerminal(term);}));
 }
 
 exports.activate = activate;
