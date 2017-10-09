@@ -12,6 +12,14 @@ __USE AT YOUR OWN RISK__
 
 This is an **unofficial** extension and it is not affiliated in any way with Epic Games. This extension shouldn't be used in a production environment. Things will probably change and/or break regulary.
 
+Unreal Engine 4.18
+------------------
+Unreal Engine 4.18 ships with official VSCode support.
+
+**Future development of this extension will halt and become maintenance and bug fixes only.**
+
+The extension will be removed from the VSCode extension marketplace once the official support makes it redundant. The github repo will remain avaialble for use with pre 4.18 versions of Unreal Engine.
+
 Install
 -------
 
@@ -96,10 +104,6 @@ Known Issues
 [https://github.com/christopherreed/ue4-cpptools/issues](https://github.com/christopherreed/ue4-cpptools/issues)
 
 * Mac untested - implemenations are 'best guess' at the moment
-
-* CppTools IntelliSense not working
-
-* Unreal Editor doesn't Hot Reload code on Linux
 
 * Generate CppTools Configuration will only include default system configuration if it is present in c_cpp_properties.json at generation time
 
