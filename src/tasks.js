@@ -29,7 +29,7 @@ function getBuildTasks(info, buildConfiguration, buildConfigurationTarget, build
         // Build, clean, and rebuild tasks for the build configuration matrix
         let tasks = [];
     
-        let args = buildtool.getBuildProjectArgs(info, buildConfiguration, buildConfigurationTarget, buildPlatform)    
+        let args = buildtool.getBuildProjectArgs(info, buildConfiguration, buildConfigurationTarget, buildPlatform);  
         buildtool.getBuildCommand(info, args).then((buildCommand) => {
             let buildTaskName = `${info.configurationName} : Build ${info.projectName} [${buildConfiguration} ${buildConfigurationTarget}]`;
             let cleanTaskName = `${info.configurationName} : Clean ${info.projectName} [${buildConfiguration} ${buildConfigurationTarget}]`;
@@ -62,7 +62,7 @@ function getBuildTasks(info, buildConfiguration, buildConfigurationTarget, build
 
             resolve(tasks);
         }).catch((err) => {
-            throw(err);
+            reject(err);
         });
     });
 }
@@ -173,9 +173,10 @@ function generateTaskConfigurations() {
                 vscode.window.showInformationMessage(`Generate Task Configurations skipped overwriting ${skippedTasks} configurations`);
             }
         }).catch((err) => {
-           vscode.showErrorMessage(`Generate Build Configurations Failed : ${err}`); 
+            vscode.window.showErrorMessage(`Generate Task Configurations Failed : ${err}`);
         });
-        
+    }).catch((err) => {
+        vscode.window.showErrorMessage(`Generate Task Configurations Failed : ${err}`);
     });
 }
 exports.generateTaskConfigurations = generateTaskConfigurations;
