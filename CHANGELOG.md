@@ -1,5 +1,9 @@
 Change Log
 ==========
+v0.1.1
+------
+Fixed Generate Task Configurations command will now display error messages
+
 v0.1.0
 ------
 
