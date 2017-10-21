@@ -88,12 +88,12 @@ function getGenerateProjectFilesArgs(info, generateNativeProjectFiles=true, gene
     }
 
     if (generateCodeLiteProjectFiles) {
+        if (!args.find((v) => {return v == '-makefile'})) args.push('-makefile');
         if (!args.find((v) => {return v == '-codelitefile'})) args.push('-codelitefile');
     }
 
     args = args.concat([
-        '-project=',
-        info.projectFilePath,
+        '-project=\"' + info.projectFilePath + "\"",
         '-game',
         '-rocket',
         '-waitmutex'
