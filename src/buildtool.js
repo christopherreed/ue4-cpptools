@@ -91,8 +91,15 @@ function getGenerateProjectFilesArgs(info, generateNativeProjectFiles=true, gene
         if (!args.find((v) => {return v == '-codelitefile'})) args.push('-codelitefile');
     }
 
+    // 4.18+ compatibility
+    if (!info.engineVersion || info.engineVersion.startsWith('4.16') || info.engineVersion.startsWith('4.17')) {
+        args.push('-project=');
+    } else {
+        // 4.18 renamed arg to -codelitefiles
+        args = args.map(arg => arg == '-codelitefile' ? '-codelitefiles' : arg);
+    }
+
     args = args.concat([
-        '-project=',
         info.projectFilePath,
         '-game',
         '-rocket',
