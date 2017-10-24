@@ -82,11 +82,15 @@ function getProjectInfo() {
         
         let overrideUnrealEditor = vscode.workspace.getConfiguration('ue4-cpptools').get('overrideUnrealEditor');
 
+        // TODO get automatically (ex. from UE4Editor.version)
+        let engineVersion = vscode.workspace.getConfiguration('ue4-cpptools').get('engineVersion');
+
         let info = {
             'projectPath' : projectPath,
             'projectName' : projectName,
             'projectFilePath' : projectFilePath,
             'engineRootPath' : engineRootPath,
+            'engineVersion' : engineVersion,
 
             'configurationName' : configurationName,
 

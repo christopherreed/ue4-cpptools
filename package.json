@@ -58,6 +58,10 @@
                     "type": "string",
                     "description": "Path to Unreal Engine root directory"
                 },
+                "ue4-cpptools.engineVersion": {
+                    "type": "string",
+                    "description": "Unreal Engine version"
+                },
                 "ue4-cpptools.configurationName": {
                     "type": "string",
                     "description": "Name used for generated configurations"
