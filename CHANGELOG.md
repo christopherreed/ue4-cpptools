@@ -1,5 +1,11 @@
 Change Log
 ==========
+v0.1.2
+------
+Added setting *engineVersion* for 4.18 compatibility
+
+Fixed project file generation for 4.18 using *engineVersion* setting
+
 v0.1.1
 ------
 Fixed Generate Task Configurations command will now display error messages
