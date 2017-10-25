@@ -2,15 +2,15 @@ ue4-cpptools
 ============
 [https://github.com/christopherreed/ue4-cpptools](https://github.com/christopherreed/ue4-cpptools)
 
+__WARNING - USE AT YOUR OWN RISK!__
+
+This is an **unofficial** extension and it is not affiliated in any way with Epic Games. This extension shouldn't be used in a production environment. Things will probably change and/or break regulary.
+
 [VSCode](https://code.visualstudio.com/) extension that provides tools for working with Unreal Engine 4 C++ projects.
 
 You may want to check out [VSCodeSourceCodeAccess](https://github.com/christopherreed/VSCodeSourceCodeAccess), an Unreal Engine 4 plugin that provides source code access for working with C++ projects using VSCode.
 
-Warning
--------
-__USE AT YOUR OWN RISK__
 
-This is an **unofficial** extension and it is not affiliated in any way with Epic Games. This extension shouldn't be used in a production environment. Things will probably change and/or break regulary.
 
 Unreal Engine 4.18
 ------------------
@@ -27,11 +27,13 @@ Install
 
 2) Install the .vsix package. [[?]](https://code.visualstudio.com/docs/editor/extension-gallery#_install-from-a-vsix)
 
-3) Set the *ue4-cpptools.engineRootPath* and any additional settings you need to configure the extension for you workspace. [[?]](https://code.visualstudio.com/docs/getstarted/settings)
+3) Set *ue4-cpptools.engineVersion* to "4.18" if you are using Unreal Engine version 4.18
+
+4) Set *ue4-cpptools.engineRootPath* and any additional settings you need to configure the extension for you workspace. [[?]](https://code.visualstudio.com/docs/getstarted/settings)
 
 > **engineRootPath is required** and should point to the root folder for the engine version you are using (*.../Epic Games/UE_4.17*). This folder should include **Engine / FeaturePacks / Samples / Templates** sub folders.
 
-4) For C++ language support, debug support, and IntelliSense install [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) extension.
+5) For C++ language support, debug support, and IntelliSense install [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) extension.
 
 Edit your project
 ----
